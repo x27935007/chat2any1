@@ -540,11 +540,12 @@ function callLLMOnce(messages, model = 'MiniMax-M2.5') {
     });
 }
 
-async function callLLM(messages, model = 'MiniMax-M2.5') {
+async function callLLM(messages, model = null) {
     let lastErr;
+    const effectiveModel = model || (typeof GLOBAL_MODEL !== 'undefined' ? GLOBAL_MODEL : 'MiniMax-M2.5');
     for (let i = 0; i < 3; i++) {
         try {
-            return await callLLMOnce(messages, model);
+            return await callLLMOnce(messages, effectiveModel);
         } catch (e) {
             lastErr = e;
             const msg = String(e.message || e);
@@ -879,6 +880,31 @@ app.get('/api/models', (req, res) => {
         defaultModel: DEFAULT_MODEL,
         models: SUPPORTED_MODELS
     });
+});
+
+// 全局设置API
+let GLOBAL_MODEL = DEFAULT_MODEL;
+let GLOBAL_API_KEY = DASHSCOPE_API_KEY;
+
+app.post('/api/settings', (req, res) => {
+    const { model, apiKey } = req.body;
+    console.log('Settings API called:', { model, apiKey });
+    
+    if (!model) {
+        return res.status(400).json({ error: '模型Code不能为空' });
+    }
+    
+    GLOBAL_MODEL = model;
+    if (apiKey && apiKey.trim()) {
+        GLOBAL_API_KEY = apiKey.trim();
+    }
+    
+    console.log('Settings updated:', { GLOBAL_MODEL, GLOBAL_API_KEY });
+    res.json({ success: true, message: '设置保存成功' });
+});
+
+app.get('/api/settings', (req, res) => {
+    res.json({ model: GLOBAL_MODEL, apiKey: GLOBAL_API_KEY ? '******' : '' });
 });
 
 // 获取所有人格（用于建群选择）

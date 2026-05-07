@@ -738,28 +738,24 @@
         }
         @keyframes pulse { 0%,100%{opacity:1; box-shadow: 0 0 0 0 rgba(102,126,234,0.7);} 50%{opacity:0.6; box-shadow: 0 0 0 8px rgba(102,126,234,0);} }
 
-        .model-input-wrapper {
+        .model-tags {
             display: flex;
-            align-items: center;
-            margin-left: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-        .model-input {
-            background: rgba(26, 26, 46, 0.9);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 8px 12px;
-            color: var(--color-text-primary);
-            font-size: 13px;
-            width: 120px;
+        .model-tag {
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: var(--radius-sm);
+            padding: 6px 12px;
+            font-size: 12px;
+            color: var(--color-primary);
+            cursor: pointer;
             transition: all var(--transition-fast);
         }
-        .model-input:focus {
-            outline: none;
+        .model-tag:hover {
+            background: rgba(102, 126, 234, 0.25);
             border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
-        }
-        .model-input:hover {
-            border-color: rgba(255,255,255,0.15);
         }
 
         #messageInput, #dmInput, #groupInput {
@@ -1198,9 +1194,7 @@
                 <div class="chat-header-actions">
                     <button class="header-action-btn">📞</button>
                     <button class="header-action-btn">📋</button>
-                    <div class="model-input-wrapper">
-                        <input type="text" id="modelInput" class="model-input" placeholder="模型" value="MiniMax-M2.5" title="输入AI模型code">
-                    </div>
+                    <button class="header-action-btn" id="settingsBtn" onclick="showSettings()">⚙️</button>
                 </div>
             </div>
             <div class="chat-messages" id="dmMessages"></div>
@@ -1353,6 +1347,41 @@
         <div class="modal-actions">
             <button class="btn btn-secondary" onclick="closeCreateGroupModal()">取消</button>
             <button class="btn btn-primary" id="createGroupBtn" onclick="submitCreateGroup()">创建群聊</button>
+        </div>
+    </div>
+</div>
+
+<!-- 设置弹窗 -->
+<div class="modal" id="settingsModal">
+    <div class="modal-box">
+        <div class="modal-title">
+            ⚙️ 设置
+            <button class="modal-close" onclick="closeSettings()">×</button>
+        </div>
+        <div class="form-group">
+            <label class="form-label">大模型 API Key</label>
+            <input class="form-input" id="settingsApiKey" placeholder="输入百炼API Key">
+        </div>
+        <div class="form-group">
+            <label class="form-label">默认模型 Code</label>
+            <input class="form-input" id="settingsModel" placeholder="如：MiniMax-M2.5, qwen-turbo, glm-4" value="MiniMax-M2.5">
+        </div>
+        <div class="form-group">
+            <label class="form-label">支持的模型列表</label>
+            <div class="model-tags" id="modelTags">
+                <span class="model-tag">MiniMax-M2.5</span>
+                <span class="model-tag">qwen-turbo</span>
+                <span class="model-tag">qwen-plus</span>
+                <span class="model-tag">qwen-max</span>
+                <span class="model-tag">glm-4</span>
+                <span class="model-tag">glm-4-flash</span>
+                <span class="model-tag">abab6.5s</span>
+                <span class="model-tag">deepseek-v4-pro</span>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeSettings()">取消</button>
+            <button class="btn btn-primary" onclick="saveSettings()">保存设置</button>
         </div>
     </div>
 </div>
@@ -1570,9 +1599,8 @@ async function sendDM() {
     msgs.appendChild(typingDiv);
     msgs.scrollTop = msgs.scrollHeight;
 
-    // 获取输入的模型
-    const modelInput = document.getElementById('modelInput');
-    const selectedModel = modelInput ? modelInput.value : 'MiniMax-M2.5';
+    // 使用全局设置的模型
+    const selectedModel = currentModel || 'MiniMax-M2.5';
 
     try {
         const res = await fetch('/api/chat', {
@@ -1813,6 +1841,57 @@ function generateSummary() {
 
 function closeSummaryModal() {
     document.getElementById('summaryModal').classList.remove('show');
+}
+
+// ============ Settings ============
+let currentModel = 'MiniMax-M2.5';
+let currentApiKey = '';
+
+function showSettings() {
+    document.getElementById('settingsModel').value = currentModel;
+    document.getElementById('settingsApiKey').value = currentApiKey;
+    document.getElementById('settingsModal').classList.add('show');
+    
+    // 添加模型标签点击事件
+    document.querySelectorAll('.model-tag').forEach(tag => {
+        tag.onclick = function() {
+            document.getElementById('settingsModel').value = this.textContent;
+        };
+    });
+}
+
+function closeSettings() {
+    document.getElementById('settingsModal').classList.remove('show');
+}
+
+async function saveSettings() {
+    const model = document.getElementById('settingsModel').value.trim();
+    const apiKey = document.getElementById('settingsApiKey').value.trim();
+    
+    if (!model) {
+        alert('请输入模型 Code');
+        return;
+    }
+    
+    try {
+        const res = await fetch('/api/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ model, apiKey })
+        });
+        
+        const data = await res.json();
+        if (res.ok) {
+            currentModel = model;
+            currentApiKey = apiKey;
+            closeSettings();
+            alert('设置保存成功！');
+        } else {
+            alert('保存失败: ' + data.error);
+        }
+    } catch (e) {
+        alert('保存失败: ' + e.message);
+    }
 }
 
 async function copySummary() {
