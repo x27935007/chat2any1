@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuwa Chat - 多人格AI对话</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --color-primary: #667eea;
+            --color-primary-dark: #764ba2;
+            --color-success: #10b981;
+            --color-success-light: #34d399;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --color-danger-light: #f87171;
+            --color-bg-primary: #0f0f1a;
+            --color-bg-secondary: #1a1a2e;
+            --color-bg-tertiary: #16213e;
+            --color-bg-card: rgba(26, 26, 46, 0.8);
+            --color-text-primary: #f1f1f1;
+            --color-text-secondary: #a1a1aa;
+            --color-text-muted: #71717a;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-border-hover: rgba(102, 126, 234, 0.4);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.2);
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s ease;
+            --transition-slow: 0.35s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
+            color: var(--color-text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* === Header === */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+        .logo { 
+            font-size: 24px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: transform var(--transition-fast);
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.2px;
+        }
+        .subtitle { 
+            font-size: 13px; 
+            color: var(--color-text-muted); 
+            margin-left: auto;
+            padding-right: var(--spacing-md);
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        .search-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 10px 16px;
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .search-btn:hover {
+            background: rgba(255,255,255,0.12);
+            color: var(--color-text-primary);
+            border-color: rgba(255,255,255,0.1);
+        }
+        .search-btn:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        .user-avatar:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        /* === Main Layout === */
+        .main-container { display: flex; flex: 1; overflow: hidden; }
+
+        /* === Sidebar === */
+        .sidebar {
+            width: 290px;
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* Tab bar */
+        .tab-bar {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            flex-shrink: 0;
+            padding: var(--spacing-sm) var(--spacing-md);
+            gap: var(--spacing-sm);
+        }
+        .tab {
+            flex: 1;
+            padding: 11px var(--spacing-lg);
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            position: relative;
+        }
+        .tab:hover { 
+            color: var(--color-text-secondary); 
+            background: rgba(255,255,255,0.05);
+        }
+        .tab.active {
+            color: var(--color-text-primary);
+            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
+            box-shadow: var(--shadow-glow);
+        }
+        .tab.active::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 2px;
+            background: var(--color-primary);
+            border-radius: 2px;
+        }
+
+        /* Sidebar content */
+        .sidebar-content { flex: 1; overflow-y: auto; padding: var(--spacing-sm); }
+
+        .sidebar-section { margin-bottom: var(--spacing-lg); }
+        .sidebar-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            letter-spacing: 1.5px;
+            margin-bottom: var(--spacing-sm);
+            padding: 0 var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Persona/DM cards */
+        .card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+        .card:hover { 
+            border-color: var(--color-border-hover); 
+            background: rgba(26, 26, 46, 0.95);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+        .card.active {
+            border-color: var(--color-primary);
+            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.1));
+            box-shadow: var(--shadow-glow);
+        }
+        .card-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 600;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        .card-avatar.online::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--color-success);
+            border: 2px solid rgba(18, 18, 26, 0.95);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+        }
+        .card-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .card-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-desc {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-meta {
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+
+        /* Group card */
+        .group-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        .group-card:hover { 
+            border-color: rgba(118,75,162,0.4); 
+            background: rgba(26, 26, 46, 0.95);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+        .group-card.active {
+            border-color: var(--color-primary-dark);
+            background: linear-gradient(135deg, rgba(118,75,162,0.15), rgba(102,126,234,0.1));
+            box-shadow: 0 0 20px rgba(118,75,162,0.2);
+        }
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: 6px;
+        }
+        .group-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(118, 75, 162, 0.3);
+        }
+        .group-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .group-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .group-meta { 
+            font-size: 12px; 
+            color: var(--color-text-muted); 
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .group-members {
+            display: flex;
+            margin-top: 4px;
+            padding-left: 48px;
+            gap: 4px;
+        }
+        .mini-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(102,126,234,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: #888;
+        }
+
+        /* Add buttons */
+        .add-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 6px;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+        }
+        .add-btn:hover { 
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .delete-btn {
+            background: rgba(245,85,85,0.1);
+            border: 1px solid rgba(245,85,85,0.2);
+            color: #f55;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+        .card:hover .delete-btn, .group-card:hover .delete-btn { opacity: 1; }
+        .delete-btn:hover { 
+            background: rgba(245,85,85,0.2);
+            border-color: rgba(245,85,85,0.4);
+        }
+
+        /* === Chat Area === */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* Chat header */
+        .chat-header {
+            padding: 14px 20px;
+            background: rgba(18, 18, 26, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .chat-header-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        .chat-header-info {
+            flex: 1;
+        }
+        .chat-header-name { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: var(--color-text-primary); 
+        }
+        .chat-header-meta { 
+            font-size: 13px; 
+            color: var(--color-text-muted); 
+            margin-top: 2px;
+        }
+        .chat-header-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        .header-action-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            color: var(--color-text-muted);
+            font-size: 15px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .header-action-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--color-text-secondary);
+            border-color: rgba(255,255,255,0.1);
+        }
+        .header-action-btn:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Messages */
+        .chat-messages { 
+            flex: 1; 
+            min-height: 0; 
+            overflow-y: scroll; 
+            overflow-x: hidden;
+            padding: var(--spacing-xl); 
+            max-height: calc(100vh - 220px);
+            background: linear-gradient(180deg, rgba(10,10,15,0.5) 0%, rgba(15,15,25,0.3) 100%);
+        }
+
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--color-text-muted);
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+        .welcome-icon { 
+            font-size: 80px; 
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.6;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .welcome h2 { 
+            font-size: 22px; 
+            color: var(--color-text-secondary); 
+            margin-bottom: var(--spacing-md);
+            font-weight: 500;
+        }
+        .welcome p { 
+            font-size: 15px; 
+            max-width: 420px; 
+            line-height: 1.8;
+            color: var(--color-text-muted);
+        }
+
+        .message { 
+            margin-bottom: var(--spacing-lg); 
+            animation: fadeIn 0.35s ease;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(12px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .message.user { 
+            flex-direction: row-reverse;
+            text-align: right; 
+        }
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.25);
+        }
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+        }
+        .message-content-wrapper {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .message-label { 
+            font-size: 12px; 
+            color: var(--color-text-muted); 
+            padding: 0 var(--spacing-sm);
+        }
+        .message-label .persona-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(102,126,234,0.2);
+            color: var(--color-primary);
+        }
+        .message-label .round-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 10px;
+            font-weight: 500;
+            background: rgba(16,185,129,0.2);
+            color: var(--color-success-light);
+            margin-left: 6px;
+        }
+        .message-label .position-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 10px;
+            font-weight: 500;
+            background: rgba(251,191,36,0.2);
+            color: var(--color-warning);
+            margin-left: 6px;
+        }
+        .message-content {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            line-height: 1.7;
+            font-size: 15px;
+            position: relative;
+        }
+        .message.assistant .message-content {
+            background: rgba(26, 26, 46, 0.92);
+            border: 1px solid var(--color-border);
+            border-bottom-left-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+        .message.user .message-content {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: var(--color-text-primary);
+            border-bottom-right-radius: var(--radius-sm);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .message.assistant.speaking .message-content {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+            animation: pulse-border 2s ease-in-out infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: var(--color-primary); }
+            50% { border-color: rgba(102, 126, 234, 0.5); }
+        }
+        .message-time {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            padding: 0 var(--spacing-sm);
+        }
+        .message.user .message-time {
+            text-align: right;
+        }
+
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: var(--spacing-md);
+            background: rgba(26, 26, 46, 0.92);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-sm);
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            animation: typing-bounce 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing-bounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
+
+        /* === Input Area === */
+        .input-area {
+            padding: var(--spacing-md);
+            background: rgba(18, 18, 26, 0.96);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--color-border);
+            flex-shrink: 0;
+            min-height: 100px;
+        }
+
+        /* Group mode selector */
+        .group-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .mode-select {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 8px 14px;
+            color: var(--color-text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .mode-select:focus { 
+            outline: none; 
+            border-color: var(--color-primary); 
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        .mode-select:hover {
+            border-color: rgba(255,255,255,0.15);
+        }
+        .rounds-input {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 8px 14px;
+            color: var(--color-text-primary);
+            font-size: 13px;
+            width: 65px;
+            transition: all 0.2s;
+        }
+        .rounds-input:focus { 
+            outline: none; 
+            border-color: #667eea; 
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        .control-label { font-size: 11px; color: #555; }
+
+        .input-container { 
+            display: flex; 
+            gap: 10px; 
+            align-items: flex-end;
+        }
+        .persona-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 16px;
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+        .persona-indicator .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1; box-shadow: 0 0 0 0 rgba(102,126,234,0.7);} 50%{opacity:0.6; box-shadow: 0 0 0 8px rgba(102,126,234,0);} }
+
+        #messageInput, #dmInput, #groupInput {
+            flex: 1;
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 13px 18px;
+            color: var(--color-text-primary);
+            font-size: 15px;
+            resize: none;
+            min-height: 48px;
+            max-height: 160px;
+            font-family: inherit;
+            transition: all var(--transition-fast);
+        }
+        #messageInput:focus, #dmInput:focus, #groupInput:focus { 
+            outline: none; 
+            border-color: var(--color-primary); 
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.12);
+        }
+        #messageInput::placeholder, #dmInput::placeholder, #groupInput::placeholder { color: var(--color-text-muted); }
+        #messageInput:disabled, #dmInput:disabled, #groupInput:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: 14px 28px;
+            color: var(--color-text-primary);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.35);
+        }
+        .send-btn:hover { 
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.45);
+        }
+        .send-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.35);
+        }
+        .send-btn:disabled { 
+            opacity: 0.4; 
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* === Modals === */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal.show { 
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+        .modal-box {
+            background: linear-gradient(135deg, rgba(26, 26, 36, 0.98), rgba(30, 30, 45, 0.98));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 28px;
+            width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        .modal-box.wide { width: 680px; }
+        .modal-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-close {
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: #666;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .modal-close:hover { 
+            color: #fff; 
+            background: rgba(255,255,255,0.1);
+        }
+
+        .form-group { margin-bottom: 14px; }
+        .form-label { 
+            display: block; 
+            font-size: 12px; 
+            color: #777; 
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .form-input {
+            width: 100%;
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 11px 14px;
+            color: #e0e0e0;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .form-input:focus { 
+            border-color: #667eea; 
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        .form-input::placeholder { color: #444; }
+        textarea.form-input { resize: vertical; min-height: 80px; }
+
+        /* Persona selector */
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-height: 260px;
+            overflow-y: auto;
+            padding: 6px;
+            background: rgba(10, 10, 15, 0.3);
+            border-radius: 10px;
+        }
+        .persona-check-item {
+            background: rgba(26, 26, 36, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 10px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s;
+        }
+        .persona-check-item:hover { 
+            border-color: rgba(102,126,234,0.4); 
+            background: rgba(26, 26, 36, 0.9);
+        }
+        .persona-check-item.selected {
+            border-color: #667eea;
+            background: rgba(102,126,234,0.12);
+            box-shadow: 0 0 12px rgba(102,126,234,0.15);
+        }
+        .persona-check-item input { display: none; }
+        .persona-check-box {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #444;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+        .persona-check-item.selected .persona-check-box {
+            background: #667eea;
+            border-color: #667eea;
+        }
+        .persona-check-box::after {
+            content: '✓';
+            color: #fff;
+            font-size: 10px;
+            opacity: 0;
+        }
+        .persona-check-item.selected .persona-check-box::after {
+            opacity: 1;
+        }
+        .persona-check-name { font-size: 13px; color: #ccc; }
+
+        .modal-actions { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.92; }
+        .btn-secondary { 
+            background: rgba(255,255,255,0.08); 
+            color: #ccc; 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+        .btn:disabled { 
+            opacity: 0.5; 
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .modal-status {
+            font-size: 13px;
+            margin-top: 12px;
+            min-height: 20px;
+            color: #888;
+            padding: 10px 14px;
+            background: rgba(26, 26, 36, 0.5);
+            border-radius: 8px;
+        }
+
+        /* Steps display */
+        .steps { margin-top: 12px; }
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .step-dot {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .step-dot.done { 
+            border-color: #10b981; 
+            background: #10b981; 
+            box-shadow: 0 0 8px rgba(16,185,129,0.4);
+        }
+        .step-dot.active {
+            border-color: #667eea;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+            box-shadow: 0 0 8px rgba(102,126,234,0.4);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .step-dot.wait { opacity: 0.3; }
+        .step-text { color: #777; }
+        .step-text.done { color: #10b981; }
+        .step-text.active { color: #667eea; }
+        .step-text.wait { opacity: 0.5; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        /* Group persona pills */
+        .group-persona-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        /* Invite bar */
+        .invite-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .invite-pill-btn {
+            background: rgba(102,126,234,0.15);
+            border: 1px solid rgba(102,126,234,0.3);
+            border-radius: 16px;
+            padding: 6px 14px;
+            color: #818cf8;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .invite-pill-btn:hover {
+            background: rgba(102,126,234,0.25);
+            border-color: rgba(102,126,234,0.5);
+        }
+        .summary-pill-btn {
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.3);
+            border-radius: 16px;
+            padding: 6px 14px;
+            color: #34d399;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .summary-pill-btn:hover {
+            background: rgba(16,185,129,0.25);
+            border-color: rgba(16,185,129,0.5);
+        }
+        .summary-pill-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .persona-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 7px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.04);
+            color: #d4d4d8;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.2s;
+        }
+        .persona-pill:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(102,126,234,0.3);
+        }
+
+        /* Hidden */
+        .hidden { display: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { width: 240px; }
+            .modal-box { width: 100%; max-width: 400px; }
+            .modal-box.wide { width: 100%; }
+            .persona-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <span class="logo">🧠</span>
+    <h1>Nuwa Chat</h1>
+    <span class="subtitle">多人格AI思维对话</span>
+    <div class="header-right">
+        <button class="search-btn">🔍 搜索</button>
+        <div class="user-avatar">👤</div>
+    </div>
+</header>
+
+<div class="main-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="tab-bar">
+            <div class="tab active" id="tabDM" onclick="switchTab('dm')">
+                <span>💬</span>
+                <span>DM</span>
+            </div>
+            <div class="tab" id="tabGroup" onclick="switchTab('group')">
+                <span>👥</span>
+                <span>群聊</span>
+            </div>
+        </div>
+
+        <div class="sidebar-content">
+            <!-- DM Tab -->
+            <div id="dmContent">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">
+                        <span>选择思考者</span>
+                        <button class="add-btn" onclick="openAddModal()" title="新增人物">+</button>
+                    </div>
+                    <div id="personaList"></div>
+                </div>
+            </div>
+
+            <!-- Group Tab -->
+            <div id="groupContent" class="hidden">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">
+                        <span>我的群聊</span>
+                        <button class="add-btn" onclick="openCreateGroupModal()" title="新建群聊">+</button>
+                    </div>
+                    <div id="groupList"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="chat-area">
+        <!-- Welcome -->
+        <div class="welcome" id="welcome">
+            <div class="welcome-icon">💭</div>
+            <h2>选择一个思考者开始对话</h2>
+            <p>与乔布斯、马斯克、芒格等AI人格深入交流，或创建群聊让多个人格共同探讨问题</p>
+        </div>
+
+        <!-- DM Chat -->
+        <div id="dmChat" class="hidden">
+            <div class="chat-header">
+                <div class="chat-header-avatar" id="dmHeaderAvatar">👤</div>
+                <div class="chat-header-info">
+                    <div class="chat-header-name" id="dmHeaderName">-</div>
+                    <div class="chat-header-meta" id="dmHeaderMeta">在线</div>
+                </div>
+                <div class="chat-header-actions">
+                    <button class="header-action-btn">📞</button>
+                    <button class="header-action-btn">📋</button>
+                    <button class="header-action-btn">⚙️</button>
+                </div>
+            </div>
+            <div class="chat-messages" id="dmMessages"></div>
+            <div class="input-area">
+                <div class="input-container">
+                    <div class="persona-indicator">
+                        <span class="dot"></span>
+                        <span id="dmIndicatorName">-</span>
+                    </div>
+                    <textarea id="dmInput" placeholder="输入你的问题..." rows="1" disabled></textarea>
+                    <button class="send-btn" id="dmSendBtn" onclick="sendDM()" disabled>发送</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group Chat -->
+        <div id="groupChat" class="hidden">
+            <div class="chat-header">
+                <div class="chat-header-avatar">👥</div>
+                <div class="chat-header-info">
+                    <div class="chat-header-name" id="groupHeaderName">-</div>
+                    <div class="chat-header-meta" id="groupHeaderMeta"></div>
+                </div>
+                <div class="chat-header-actions">
+                    <button class="header-action-btn">📋</button>
+                    <button class="header-action-btn">⚙️</button>
+                </div>
+            </div>
+            <div class="chat-messages" id="groupMessages"></div>
+            <div class="input-area">
+                <div class="invite-bar" id="inviteBar">
+                    <button class="invite-pill-btn" onclick="openInviteModal()">👥 邀请</button>
+                    <button class="summary-pill-btn" onclick="generateSummary()">📊 总结</button>
+                    <div class="group-persona-pills" id="groupPersonaPills"></div>
+                </div>
+                <div class="group-controls" id="groupControls">
+                    <span class="control-label">模式:</span>
+                    <select class="mode-select" id="groupMode">
+                        <option value="sequential">依次发言</option>
+                        <option value="指定轮次">指定轮次</option>
+                    </select>
+                    <span class="control-label" id="roundsLabel" style="display:none;">轮次:</span>
+                    <input type="number" class="rounds-input" id="groupRounds" value="1" min="1" max="5" style="display:none;">
+                </div>
+                <div class="input-container">
+                    <textarea id="groupInput" placeholder="发起讨论..." rows="1" disabled></textarea>
+                    <button class="send-btn" id="groupSendBtn" onclick="sendGroup()" disabled>发送</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ========== Modals ========== -->
+
+<!-- Distill Modal -->
+<div class="modal" id="addModal">
+    <div class="modal-box">
+        <div class="modal-title">
+            🧠 蒸馏新人物
+            <button class="modal-close" onclick="closeAddModal()">×</button>
+        </div>
+        <form id="addForm" onsubmit="return false;">
+            <div class="form-group">
+                <label class="form-label">人物名称 *</label>
+                <input class="form-input" id="addName" placeholder="如：张小龙、曾鸣、毛泽东" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">一句话简介</label>
+                <input class="form-input" id="addDesc" placeholder="如：微信之父，产品哲学家">
+            </div>
+            <div class="form-group">
+                <label class="form-label">人物背景</label>
+                <textarea class="form-input" id="addBg" placeholder="出生年份、学历、主要经历..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">核心思想/方法论</label>
+                <textarea class="form-input" id="addPerspectives" placeholder="这个人最重要的几个观点是什么？"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">表达风格（可选）</label>
+                <input class="form-input" id="addStyle" placeholder="如：简洁有力、爱用类比、幽默自嘲">
+            </div>
+            <div class="modal-status" id="addStatus"></div>
+            <div class="steps" id="distillProgress"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeAddModal()">取消</button>
+                <button class="btn btn-primary" id="addSubmitBtn" onclick="submitAddForm()">开始蒸馏</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Summary Modal -->
+<div class="modal" id="summaryModal">
+    <div class="modal-box wide">
+        <div class="modal-title">
+            📊 群聊分析报告
+            <button class="modal-close" onclick="closeSummaryModal()">×</button>
+        </div>
+        <div class="form-group">
+            <div id="summaryContent" style="white-space: pre-wrap; font-size: 14px; line-height: 1.8; color: #ccc; max-height: 60vh; overflow-y: auto;">
+                正在生成总结...
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeSummaryModal()">关闭</button>
+            <button class="btn btn-primary" onclick="copySummary()">复制报告</button>
+        </div>
+    </div>
+</div>
+
+<!-- Invite Members Modal -->
+<div class="modal" id="inviteModal">
+    <div class="modal-box wide">
+        <div class="modal-title">
+            👥 邀请成员
+            <button class="modal-close" onclick="closeInviteModal()">×</button>
+        </div>
+        <div class="form-group">
+            <label class="form-label">当前群成员</label>
+            <div class="group-persona-pills" id="inviteCurrentMembers"></div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">选择要添加或移除的成员</label>
+            <div class="persona-grid" id="invitePersonaGrid"></div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeInviteModal()">取消</button>
+            <button class="btn btn-primary" id="inviteSubmitBtn" onclick="submitInvite()">确认修改</button>
+        </div>
+    </div>
+</div>
+
+<!-- Create Group Modal -->
+<div class="modal" id="createGroupModal">
+    <div class="modal-box wide">
+        <div class="modal-title">
+            👥 创建群聊
+            <button class="modal-close" onclick="closeCreateGroupModal()">×</button>
+        </div>
+        <div class="form-group">
+            <label class="form-label">群聊名称 *</label>
+            <input class="form-input" id="groupName" placeholder="如：创业三人组、产品评审、投资智囊团">
+        </div>
+        <div class="form-group">
+            <label class="form-label">选择成员（至少2人）</label>
+            <div class="persona-grid" id="groupPersonaGrid"></div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeCreateGroupModal()">取消</button>
+            <button class="btn btn-primary" id="createGroupBtn" onclick="submitCreateGroup()">创建群聊</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============ State ============
+let personas = [];
+let groups = [];
+let currentTab = 'dm';
+let selectedDM = null;
+let selectedGroup = null;
+let dmHistory = [];
+let groupSSE = null;
+let currentDistillSSE = null;
+
+// ============ Init ============
+async function init() {
+    await loadPersonas();
+    await loadGroups();
+}
+
+// ============ Personas ============
+async function loadPersonas() {
+    try {
+        const res = await fetch('/api/personas');
+        personas = await res.json();
+        renderPersonaList();
+        renderGroupPersonaGrid();
+    } catch (e) {
+        console.error('Failed to load personas:', e);
+    }
+}
+
+function renderPersonaList() {
+    const list = document.getElementById('personaList');
+    list.innerHTML = personas.map(p => {
+        const avatar = getAvatarEmoji(p.name);
+        return `
+            <div class="card" data-id="${p.id}" onclick="selectDM('${p.id}')">
+                <div class="card-avatar online">${avatar}</div>
+                <div class="card-info">
+                    <div class="card-name">${p.name}</div>
+                    <div class="card-desc">${p.description || '点击选择开始对话'}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function getAvatarEmoji(name) {
+    const emojis = ['🧠', '💡', '🤔', '💬', '👤', '👨‍💼', '👩‍💼', '🧔', '👨‍🔬', '🎓', '💼', '🌟'];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return emojis[Math.abs(hash) % emojis.length];
+}
+
+// ============ Groups ============
+async function loadGroups() {
+    try {
+        const res = await fetch('/api/groups');
+        groups = await res.json();
+        renderGroupList();
+    } catch (e) {
+        console.error('Failed to load groups:', e);
+    }
+}
+
+function renderGroupList() {
+    const list = document.getElementById('groupList');
+    if (groups.length === 0) {
+        list.innerHTML = '<div style="font-size:13px;color:#444;text-align:center;padding:30px 10px;">还没有群聊，点击右上角 + 创建一个</div>';
+        return;
+    }
+    list.innerHTML = groups.map(g => `
+        <div class="group-card" data-id="${g.id}" onclick="selectGroup('${g.id}')">
+            <div class="group-header">
+                <div class="group-avatar">👥</div>
+                <div class="group-info">
+                    <div class="group-name">${g.name}</div>
+                    <div class="group-meta">${g.personaNames.join(' · ')}</div>
+                </div>
+                <button class="delete-btn" onclick="event.stopPropagation();deleteGroup('${g.id}')">删除</button>
+            </div>
+            <div class="group-members">
+                ${g.personaNames.slice(0, 5).map((n, i) => `<div class="mini-avatar">${getInitial(n)}</div>`).join('')}
+                ${g.personaNames.length > 5 ? `<div class="mini-avatar">+${g.personaNames.length - 5}</div>` : ''}
+            </div>
+            <div style="font-size:11px;color:#444;margin-top:4px;padding-left:48px;">${g.messageCount}条消息 · 更新于${formatTime(g.updatedAt)}</div>
+        </div>
+    `).join('');
+}
+
+function getInitial(name) {
+    return name.charAt(0).toUpperCase();
+}
+
+function formatTime(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diff = now - date;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    if (hours < 1) return '刚刚';
+    if (hours < 24) return `${hours}小时前`;
+    return `${Math.floor(hours / 24)}天前`;
+}
+
+async function deleteGroup(id) {
+    if (!confirm('确定删除这个群聊？此操作不可撤销。')) return;
+    try {
+        await fetch(`/api/groups/${id}`, { method: 'DELETE' });
+        if (selectedGroup && selectedGroup.id === id) {
+            selectedGroup = null;
+            showWelcome();
+        }
+        await loadGroups();
+    } catch (e) {
+        alert('删除失败: ' + e.message);
+    }
+}
+
+// ============ Tab Switch ============
+function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById('tabDM').classList.toggle('active', tab === 'dm');
+    document.getElementById('tabGroup').classList.toggle('active', tab === 'group');
+    document.getElementById('dmContent').classList.toggle('hidden', tab !== 'dm');
+    document.getElementById('groupContent').classList.toggle('hidden', tab !== 'group');
+
+    if (tab === 'dm') {
+        document.getElementById('groupChat').classList.add('hidden');
+        if (selectedDM) showDM(selectedDM);
+        else showWelcome();
+    } else {
+        document.getElementById('dmChat').classList.add('hidden');
+        if (selectedGroup) showGroup(selectedGroup);
+        else showWelcome();
+    }
+}
+
+// ============ DM ============
+function selectDM(id) {
+    selectedDM = personas.find(p => p.id === id);
+    if (!selectedDM) return;
+    dmHistory = [];
+
+    document.querySelectorAll('#personaList .card').forEach(c => c.classList.remove('active'));
+    document.querySelector(`#personaList [data-id="${id}"]`).classList.add('active');
+
+    showDM(selectedDM);
+}
+
+function showDM(persona) {
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('groupChat').classList.add('hidden');
+    document.getElementById('dmChat').classList.remove('hidden');
+    
+    document.getElementById('dmHeaderAvatar').textContent = getAvatarEmoji(persona.name);
+    document.getElementById('dmHeaderName').textContent = persona.name;
+    document.getElementById('dmHeaderMeta').textContent = '在线';
+    document.getElementById('dmIndicatorName').textContent = persona.name;
+    document.getElementById('dmMessages').innerHTML = '';
+    document.getElementById('dmInput').disabled = false;
+    document.getElementById('dmSendBtn').disabled = false;
+    document.getElementById('dmInput').focus();
+}
+
+function addDMMessage(role, content, timestamp) {
+    const msgs = document.getElementById('dmMessages');
+    const div = document.createElement('div');
+    div.className = `message ${role}`;
+    const label = role === 'user' ? '你' : selectedDM.name;
+    const avatar = role === 'user' ? '👤' : getAvatarEmoji(selectedDM.name);
+    const time = timestamp ? formatTime(timestamp) : '';
+    
+    div.innerHTML = `
+        <div class="message-avatar">${avatar}</div>
+        <div class="message-content-wrapper">
+            <div class="message-label">${label}</div>
+            <div class="message-content">${content.replace(/\n/g, '<br>')}</div>
+            ${time ? `<div class="message-time">${time}</div>` : ''}
+        </div>
+    `;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function sendDM() {
+    const input = document.getElementById('dmInput');
+    const text = input.value.trim();
+    if (!text || !selectedDM) return;
+
+    addDMMessage('user', text, Date.now());
+    input.value = '';
+    dmHistory.push({ user: text, assistant: '' });
+
+    const sendBtn = document.getElementById('dmSendBtn');
+    sendBtn.disabled = true;
+    input.disabled = true;
+
+    // Show typing indicator
+    const msgs = document.getElementById('dmMessages');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message assistant speaking';
+    typingDiv.innerHTML = `
+        <div class="message-avatar">${getAvatarEmoji(selectedDM.name)}</div>
+        <div class="message-content-wrapper">
+            <div class="message-label">${selectedDM.name}</div>
+            <div class="typing-indicator">
+                <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+            </div>
+        </div>
+    `;
+    msgs.appendChild(typingDiv);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    try {
+        const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                personaId: selectedDM.id,
+                question: text,
+                history: dmHistory.slice(0, -1).map(h => ({ user: h.user, assistant: h.assistant || '' }))
+            })
+        });
+        
+        // Remove typing indicator
+        typingDiv.remove();
+        
+        const data = await res.json();
+        if (!res.ok) {
+            addDMMessage('assistant', '❌ 错误: ' + data.error, Date.now());
+        } else {
+            addDMMessage('assistant', data.response, Date.now());
+            dmHistory[dmHistory.length - 1].assistant = data.response;
+        }
+    } catch (e) {
+        typingDiv.remove();
+        addDMMessage('assistant', '❌ 网络错误: ' + e.message, Date.now());
+    }
+
+    sendBtn.disabled = false;
+    input.disabled = false;
+    input.focus();
+}
+
+// Enter to send
+document.getElementById('dmInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendDM();
+    }
+});
+document.getElementById('dmInput').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+});
+
+// ============ Group ============
+function selectGroup(id) {
+    const group = groups.find(g => g.id === id);
+    if (!group) return;
+    selectedGroup = group;
+    showGroup(group);
+}
+
+async function showGroup(group) {
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('dmChat').classList.add('hidden');
+    document.getElementById('groupChat').classList.remove('hidden');
+
+    document.getElementById('groupHeaderName').textContent = group.name;
+    document.getElementById('groupHeaderMeta').textContent = `${group.personaNames.length} 位成员`;
+
+    // Render persona pills
+    document.getElementById('groupPersonaPills').innerHTML = group.personaNames.map(n =>
+        `<span class="persona-pill">${n}</span>`
+    ).join('');
+
+    // Load messages
+    try {
+        const res = await fetch(`/api/groups/${group.id}/messages`);
+        const data = await res.json();
+        selectedGroup.messages = data.messages;
+            renderGroupMessages(data.messages);
+    } catch (e) {
+        renderGroupMessages([]);
+    }
+
+    document.getElementById('groupInput').disabled = false;
+    document.getElementById('groupSendBtn').disabled = false;
+    document.getElementById('groupInput').focus();
+}
+
+function renderGroupMessages(messages) {
+    if (!Array.isArray(messages)) { messages = []; }
+    const msgs = document.getElementById('groupMessages');
+    msgs.innerHTML = messages.map((m, index) => {
+        const avatar = m.role === 'user' ? '👤' : getAvatarEmoji(m.personaName || '');
+        const time = formatTime(m.timestamp);
+        const roundBadge = m.round ? `<span class="round-badge">${m.round}/${m.totalRounds}</span>` : '';
+        const positionBadge = m.position ? `<span class="position-badge">#${m.position}</span>` : '';
+        
+        if (m.role === 'user') {
+            return `<div class="message user" data-index="${index}">
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content-wrapper">
+                    <div class="message-label">你 ${roundBadge}${positionBadge}</div>
+                    <div class="message-content">${String(m.content||'').replace(/\n/g, '<br>')}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            </div>`;
+        } else {
+            return `<div class="message assistant" data-index="${index}">
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content-wrapper">
+                    <div class="message-label"><span class="persona-tag">${m.personaName || '?'}</span> ${roundBadge}${positionBadge}</div>
+                    <div class="message-content">${String(m.content||'').replace(/\n/g, '<br>')}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            </div>`;
+        }
+    }).join('');
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+// Mode toggle
+document.getElementById('groupMode').addEventListener('change', function() {
+    const showRounds = this.value === '指定轮次';
+    document.getElementById('roundsLabel').style.display = showRounds ? '' : 'none';
+    document.getElementById('groupRounds').style.display = showRounds ? '' : 'none';
+});
+
+async function sendGroup() {
+    const input = document.getElementById('groupInput');
+    const text = input.value.trim();
+    if (!text || !selectedGroup) return;
+
+    const mode = document.getElementById('groupMode').value;
+    const rounds = parseInt(document.getElementById('groupRounds').value) || 1;
+    const personas_to_use = selectedGroup.personas;
+
+    // Add user message
+    selectedGroup.messages = selectedGroup.messages || [];
+    selectedGroup.messages.push({
+        id: Date.now(), role: 'user', persona: null, personaName: '你', content: text, timestamp: Date.now()
+    });
+    renderGroupMessages(selectedGroup.messages);
+
+    input.value = '';
+    const sendBtn = document.getElementById('groupSendBtn');
+    sendBtn.disabled = true;
+    input.disabled = true;
+
+    try {
+        const res = await fetch(`/api/groups/${selectedGroup.id}/messages`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: text, mode, rounds, personas: personas_to_use })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+            addGroupError('❌ 错误: ' + data.error);
+        } else {
+            if (data.errors && data.errors.length) {
+                const hint =
+                    '无法连接智谱 API（open.bigmodel.cn）时会出现 ENOTFOUND / EAI_AGAIN，请检查本机网络、DNS、代理或防火墙。';
+                const detail = data.errors
+                    .map(e => `${e.personaName || e.personaId}: ${e.error}`)
+                    .join('\n');
+                addGroupError('⚠️ 模型调用失败\n' + detail + '\n\n' + hint);
+            }
+            const historyRes = await fetch(`/api/groups/${selectedGroup.id}/messages`);
+            const historyData = await historyRes.json();
+            selectedGroup.messages = historyData.messages;
+            renderGroupMessages(selectedGroup.messages);
+        }
+    } catch (e) {
+        addGroupError('❌ 网络错误: ' + e.message);
+    }
+
+    sendBtn.disabled = false;
+    input.disabled = false;
+    input.focus();
+}
+
+function getPersonaName(id) {
+    return (personas.find(p => p.id === id) || {}).name || id;
+}
+
+function addGroupError(msg) {
+    const msgs = document.getElementById('groupMessages');
+    const div = document.createElement('div');
+    div.className = 'message assistant';
+    div.innerHTML = `
+        <div class="message-avatar">⚠️</div>
+        <div class="message-content-wrapper">
+            <div class="message-label">系统</div>
+            <div class="message-content" style="color:#f55;">${msg}</div>
+        </div>
+    `;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+// Enter to send
+document.getElementById('groupInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendGroup();
+    }
+});
+document.getElementById('groupInput').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+});
+
+// ============ Summary ============
+let currentSummary = '';
+
+function generateSummary() {
+    if (!selectedGroup) return;
+    
+    const btn = document.querySelector('.summary-pill-btn');
+    btn.disabled = true;
+    btn.innerHTML = '⏳ 生成中...';
+    
+    document.getElementById('summaryModal').classList.add('show');
+    document.getElementById('summaryContent').textContent = '正在分析群聊内容...';
+    
+    fetch(`/api/groups/${selectedGroup.id}/summary`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+    }).then(res => res.json())
+    .then(data => {
+        if (data.summary) {
+            currentSummary = data.summary;
+            document.getElementById('summaryContent').textContent = data.summary;
+        } else {
+            document.getElementById('summaryContent').textContent = '生成失败: ' + (data.error || '未知错误');
+        }
+    }).catch(e => {
+        document.getElementById('summaryContent').textContent = '生成失败: ' + e.message;
+    }).finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = '📊 总结';
+    });
+}
+
+function closeSummaryModal() {
+    document.getElementById('summaryModal').classList.remove('show');
+}
+
+async function copySummary() {
+    if (!currentSummary) return;
+    try {
+        await navigator.clipboard.writeText(currentSummary);
+        alert('报告已复制到剪贴板！');
+    } catch (e) {
+        alert('复制失败: ' + e.message);
+    }
+}
+
+// ============ Invite Members ============
+function openInviteModal() {
+    if (!selectedGroup) return;
+    
+    document.getElementById('inviteModal').classList.add('show');
+    
+    // Show current members
+    document.getElementById('inviteCurrentMembers').innerHTML = selectedGroup.personaNames.map(n =>
+        `<span class="persona-pill">${n}</span>`
+    ).join('');
+    
+    // Render persona grid with current members pre-selected
+    renderInvitePersonaGrid();
+}
+
+function closeInviteModal() {
+    document.getElementById('inviteModal').classList.remove('show');
+}
+
+function renderInvitePersonaGrid() {
+    const grid = document.getElementById('invitePersonaGrid');
+    grid.innerHTML = personas.map(p => {
+        const isSelected = (selectedGroup.personas || []).includes(p.id);
+        return `
+            <label class="persona-check-item ${isSelected ? 'selected' : ''}" id="inv-${p.id}">
+                <input type="checkbox" value="${p.id}" ${isSelected ? 'checked' : ''}>
+                <span class="persona-check-box"></span>
+                <span class="persona-check-name">${p.name}</span>
+            </label>
+        `;
+    }).join('');
+
+    grid.querySelectorAll('input').forEach(inp => {
+        inp.addEventListener('change', () => {
+            inp.parentElement.classList.toggle('selected', inp.checked);
+        });
+    });
+}
+
+async function submitInvite() {
+    if (!selectedGroup) return;
+    
+    const selected = Array.from(document.querySelectorAll('#invitePersonaGrid input:checked')).map(i => i.value);
+    
+    if (selected.length < 2) {
+        alert('群聊至少需要2名成员');
+        return;
+    }
+
+    try {
+        const res = await fetch(`/api/groups/${selectedGroup.id}/members`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ personas: selected })
+        });
+        const data = await res.json();
+        
+        if (!res.ok) {
+            alert(data.error);
+            return;
+        }
+
+        closeInviteModal();
+        
+        // Update selectedGroup
+        selectedGroup.personas = data.personas;
+        selectedGroup.personaNames = data.personaNames;
+        
+        // Refresh UI
+        document.getElementById('groupHeaderMeta').textContent = `${selectedGroup.personaNames.length} 位成员`;
+        document.getElementById('groupPersonaPills').innerHTML = selectedGroup.personaNames.map(n =>
+            `<span class="persona-pill">${n}</span>`
+        ).join('');
+        
+        // Refresh group list
+        await loadGroups();
+        
+    } catch (e) {
+        alert('修改失败: ' + e.message);
+    }
+}
+
+// ============ Create Group ============
+function openCreateGroupModal() {
+    document.getElementById('createGroupModal').classList.add('show');
+    document.getElementById('groupName').value = '';
+    renderGroupPersonaGrid();
+}
+
+function closeCreateGroupModal() {
+    document.getElementById('createGroupModal').classList.remove('show');
+}
+
+function renderGroupPersonaGrid() {
+    const grid = document.getElementById('groupPersonaGrid');
+    grid.innerHTML = personas.map(p => `
+        <label class="persona-check-item" id="gp-${p.id}">
+            <input type="checkbox" value="${p.id}">
+            <span class="persona-check-box"></span>
+            <span class="persona-check-name">${p.name}</span>
+        </label>
+    `).join('');
+
+    grid.querySelectorAll('input').forEach(inp => {
+        inp.addEventListener('change', () => {
+            inp.parentElement.classList.toggle('selected', inp.checked);
+        });
+    });
+}
+
+async function submitCreateGroup() {
+    const name = document.getElementById('groupName').value.trim();
+    const selected = Array.from(document.querySelectorAll('#groupPersonaGrid input:checked')).map(i => i.value);
+
+    if (!name) { alert('请输入群聊名称'); return; }
+    if (selected.length < 2) { alert('请至少选择2个人物'); return; }
+
+    try {
+        const res = await fetch('/api/groups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, personas: selected })
+        });
+        const data = await res.json();
+        if (!res.ok) { alert(data.error); return; }
+
+        closeCreateGroupModal();
+        await loadGroups();
+
+        const newGroup = groups.find(g => g.id === data.id) || {
+            id: data.id, name: data.name,
+            personas: data.personas, personaNames: data.personaNames,
+            messages: [], messageCount: 0
+        };
+        if (!groups.find(g => g.id === data.id)) {
+            groups.unshift(newGroup);
+        }
+        renderGroupList();
+        selectGroup(data.id);
+        switchTab('group');
+
+    } catch (e) {
+        alert('创建失败: ' + e.message);
+    }
+}
+
+// ============ Distill Modal ============
+const STEPS = [
+    '初始化', 'Phase 1 完成',
+    '[Agent1] 背景研究', '[Agent2] 决策分析',
+    '[Agent3] 表达DNA', '[Agent4] 质量验证',
+    '[Assembler] 组装SKILL.md', '写入文件', '完成'
+];
+
+function openAddModal() {
+    document.getElementById('addModal').classList.add('show');
+    document.getElementById('addForm').reset();
+    document.getElementById('addStatus').textContent = '';
+    document.getElementById('distillProgress').innerHTML = '';
+    document.getElementById('addSubmitBtn').disabled = false;
+    document.getElementById('addSubmitBtn').textContent = '开始蒸馏';
+    document.getElementById('addName').focus();
+}
+
+function closeAddModal() {
+    document.getElementById('addModal').classList.remove('show');
+    if (currentDistillSSE) {
+        currentDistillSSE.close();
+        currentDistillSSE = null;
+    }
+}
+
+function renderDistillProgress(stepsDone, currentStep, currentMsg) {
+    const el = document.getElementById('distillProgress');
+    if (stepsDone.length === 0 && !currentStep) { el.innerHTML = ''; return; }
+    let html = '<div class="steps">';
+    for (let i = 0; i < STEPS.length; i++) {
+        const done = i < stepsDone.length;
+        const active = i === currentStep - 1;
+        const cls = done ? 'done' : active ? 'active' : 'wait';
+        const txt = done ? '✓' : active ? '○' : '○';
+        const textCls = done ? 'done' : active ? 'active' : 'wait';
+        const text = active ? (currentMsg || STEPS[i]) : STEPS[i];
+        html += `<div class="step-item"><span class="step-dot ${cls}"></span><span class="step-text ${textCls}">${text}</span></div>`;
+    }
+    html += '</div>';
+    el.innerHTML = html;
+}
+
+async function submitAddForm() {
+    const name = document.getElementById('addName').value.trim();
+    const desc = document.getElementById('addDesc').value.trim();
+    const bg = document.getElementById('addBg').value.trim();
+    const perspectives = document.getElementById('addPerspectives').value.trim();
+    const style = document.getElementById('addStyle').value.trim();
+
+    if (!name) {
+        document.getElementById('addStatus').textContent = '请输入人物名称';
+        document.getElementById('addStatus').style.color = '#f55';
+        return;
+    }
+
+    const btn = document.getElementById('addSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '蒸馏中...';
+    renderDistillProgress([], 1, '连接中...');
+
+    try {
+        const sse = new EventSource('/api/personas/distill-stream');
+        currentDistillSSE = sse;
+        let sessionId = null;
+        let done = false;
+
+        sse.addEventListener('init', async (e) => {
+            const data = JSON.parse(e.data);
+            sessionId = data.sessionId;
+            renderDistillProgress([], 1, '开始蒸馏...');
+
+            try {
+                const res = await fetch('/api/personas', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, description: desc, background: bg, perspectives, style, sessionId })
+                });
+                const data = await res.json();
+                if (!res.ok && !sessionId) {
+                    done = true;
+                    document.getElementById('addStatus').textContent = data.error || '创建失败';
+                    document.getElementById('addStatus').style.color = '#f55';
+                    btn.disabled = false;
+                    btn.textContent = '开始蒸馏';
+                    sse.close();
+                }
+            } catch (e) {
+                done = true;
+                document.getElementById('addStatus').textContent = '网络错误: ' + e.message;
+                document.getElementById('addStatus').style.color = '#f55';
+                btn.disabled = false;
+                btn.textContent = '开始蒸馏';
+                sse.close();
+            }
+        });
+
+        sse.addEventListener('progress', (e) => {
+            const { step, message } = JSON.parse(e.data);
+            const stepsDone = [];
+            for (let i = 1; i < step; i++) stepsDone.push(i);
+            renderDistillProgress(stepsDone, step, message);
+            document.getElementById('addStatus').textContent = message;
+            document.getElementById('addStatus').style.color = '#667eea';
+        });
+
+        sse.addEventListener('complete', (e) => {
+            if (done) return;
+            done = true;
+            const result = JSON.parse(e.data);
+            renderDistillProgress([1,2,3,4,5,6,7,8,9], 10);
+            document.getElementById('addStatus').textContent = result.message;
+            document.getElementById('addStatus').style.color = '#4f4';
+            btn.textContent = '✓ 已完成';
+
+            setTimeout(async () => {
+                closeAddModal();
+                await loadPersonas();
+                const card = document.querySelector(`#personaList [data-id="${result.id}"]`);
+                if (card) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.style.boxShadow = '0 0 0 3px #667eea, 0 0 30px rgba(102,126,234,0.5)';
+                    setTimeout(() => { card.style.boxShadow = ''; }, 3000);
+                }
+            }, 1500);
+        });
+
+        sse.addEventListener('error', (e) => {
+            if (done) return;
+            done = true;
+            document.getElementById('addStatus').textContent = '连接错误';
+            document.getElementById('addStatus').style.color = '#f55';
+            btn.disabled = false;
+            btn.textContent = '开始蒸馏';
+            sse.close();
+        });
+
+    } catch (e) {
+        document.getElementById('addStatus').textContent = '错误: ' + e.message;
+        document.getElementById('addStatus').style.color = '#f55';
+        btn.disabled = false;
+        btn.textContent = '开始蒸馏';
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAddModal();
+        closeCreateGroupModal();
+    }
+});
+
+function showWelcome() {
+    document.getElementById('welcome').classList.remove('hidden');
+    document.getElementById('dmChat').classList.add('hidden');
+    document.getElementById('groupChat').classList.add('hidden');
+}
+
+// ============ Start ============
+init();
+</script>
+</body>
+</html>

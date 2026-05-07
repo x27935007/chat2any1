@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  nuwa-chat:
+    build: .
+    container_name: nuwa-chat
+    restart: always
+    ports:
+      - "3098:3098"
+    environment:
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+      - NODE_ENV=production
+    volumes:
+      - ./data:/app/data
+    networks:
+      - nuwa-network
+
+networks:
+  nuwa-network:
+    driver: bridge
