@@ -15,8 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY || 'sk-523abe216d5840438177d9a355570639';
 const DASHSCOPE_BASE = 'dashscope.aliyuncs.com';
-const EXAMPLES_DIR = '/home/geely/AI/agent/nvwa/nuwa-skill/examples';
-const REFERENCES_DIR = '/home/geely/AI/agent/nvwa/nuwa-skill/references';
+const EXAMPLES_DIR = './nuwa-skill/examples';
+const REFERENCES_DIR = './nuwa-skill/references';
 const DATA_DIR = path.join(__dirname, 'data/groups');
 
 // 确保数据目录存在
