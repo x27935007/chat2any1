@@ -19,6 +19,21 @@ const EXAMPLES_DIR = './nuwa-skill/examples';
 const REFERENCES_DIR = './nuwa-skill/references';
 const DATA_DIR = path.join(__dirname, 'data/groups');
 
+// 默认模型配置
+const DEFAULT_MODEL = process.env.DEFAULT_MODEL || 'MiniMax-M2.5';
+
+// 支持的模型列表
+const SUPPORTED_MODELS = [
+  { code: 'qwen-plus', name: '通义千问 Plus' },
+  { code: 'qwen-turbo', name: '通义千问 Turbo' },
+  { code: 'qwen-max', name: '通义千问 Max' },
+  { code: 'glm-4', name: 'GLM-4' },
+  { code: 'glm-4-plus', name: 'GLM-4 Plus' },
+  { code: 'MiniMax-M2.5', name: 'MiniMax M2.5' },
+  { code: 'abab6.5s', name: 'ABAB 6.5S' },
+  { code: 'deepseek-v4-pro', name: 'DeepSeek V4 Pro' }
+];
+
 // 确保数据目录存在
 fs.mkdirSync(DATA_DIR, { recursive: true });
 
@@ -553,18 +568,26 @@ function slugify(name) {
     if (hasChinese) {
         try {
             const { execSync } = require('child_process');
+            const escapedName = name.replace(/'/g, "\\'");
             const py = execSync(
-                `python3 -c "from pypinyin import lazy_pinyin; print(''.join(lazy_pinyin('${name.replace(/'/g, "'")}')))"`,
+                `python3 -c "from pypinyin import lazy_pinyin; print(''.join(lazy_pinyin('${escapedName}')))"`,
                 { encoding: 'utf-8' }
             ).trim();
             base = py.replace(/\s+/g, '-').toLowerCase();
         } catch (e) {
-            base = name.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').toLowerCase();
+            base = name
+                .replace(/[\u4e00-\u9fa5]/g, (char) => {
+                    const code = char.charCodeAt(0).toString(36);
+                    return 'c' + code;
+                })
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '')
+                .toLowerCase();
         }
     } else {
         base = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     }
-    if (!base) base = 'unnamed';
+    if (!base || base.length < 2) base = 'unnamed';
     return base + '-perspective';
 }
 
@@ -841,6 +864,14 @@ const progressEmitter = new EventEmitter();
 
 // ============ 路由 ============
 
+// 获取支持的模型列表
+app.get('/api/models', (req, res) => {
+    res.json({
+        defaultModel: DEFAULT_MODEL,
+        models: SUPPORTED_MODELS
+    });
+});
+
 // 获取所有人格（用于建群选择）
 app.get('/api/personas', (req, res) => {
     const personas = [];
@@ -910,13 +941,14 @@ app.get('/api/persona/:id', (req, res) => {
 
 // DM对话
 app.post('/api/chat', async (req, res) => {
-    const { personaId, question, history = [] } = req.body;
+    const { personaId, question, history = [], model } = req.body;
     if (!personaId || !question) return res.status(400).json({ error: 'Missing params' });
 
     const skillContent = loadSkillContent(personaId);
     if (!skillContent) return res.status(404).json({ error: 'Persona not found' });
 
     const personaName = getPersonaNameFromSkill(personaId);
+    const modelToUse = model || DEFAULT_MODEL;
 
     const systemPrompt = `你是${personaName}的视角。严格遵循SKILL.md中的角色扮演规则。
 
@@ -941,7 +973,7 @@ ${skillContent}
             ]),
             { role: 'user', content: question }
         ];
-        const response = await callLLM(messages);
+        const response = await callLLM(messages, modelToUse);
         res.json({ response });
     } catch (e) {
         res.status(500).json({ error: e.message });
@@ -1629,9 +1661,11 @@ app.post('/api/groups/:id/messages-stream', async (req, res) => {
 app.post('/api/personas', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
-    const { name, description, background, perspectives, style, sessionId } = req.body;
+    const { name, description, background, perspectives, style, sessionId, model } = req.body;
     if (!name) return res.status(400).json({ error: '缺少人物名称' });
     if (!sessionId) return res.status(400).json({ error: '缺少sessionId，请先打开SSE连接' });
+
+    const modelToUse = model || DEFAULT_MODEL;
 
     const emit = (event, data) => {
         setImmediate(() => progressEmitter.emit(event + ':' + sessionId, data));
@@ -1683,7 +1717,7 @@ app.post('/api/personas', async (req, res) => {
 ## 思想演变
 
 ## 主要影响`
-        }], 'glm-4');
+        }], modelToUse);
         fs.writeFileSync(path.join(refsDir, '01-background.md'), agent1.trim(), 'utf-8');
         emitProgress(3, '[Agent1] 背景研究完成');
 
@@ -1716,7 +1750,7 @@ app.post('/api/personas', async (req, res) => {
 ## 争议与批评
 
 ## 内在矛盾`
-        }], 'glm-4');
+        }], modelToUse);
         fs.writeFileSync(path.join(refsDir, '02-conversations.md'), agent2.trim(), 'utf-8');
         emitProgress(4, '[Agent2] 决策分析完成');
 
@@ -1744,7 +1778,7 @@ app.post('/api/personas', async (req, res) => {
 ## 幽默与情感风格
 
 ## 价值观表达方式`
-        }], 'glm-4');
+        }], modelToUse);
         fs.writeFileSync(path.join(refsDir, '03-expression-dna.md'), agent3.trim(), 'utf-8');
         emitProgress(5, '[Agent3] 表达DNA分析完成');
 
@@ -1772,8 +1806,8 @@ app.post('/api/personas', async (req, res) => {
 ## 提炼建议
 
 ## 蒸馏风险`
-        }], 'glm-4');
-        fs.writeFileSync(path.join(refsDir, '04 quality-check.md'), agent4.trim(), 'utf-8');
+        }], modelToUse);
+        fs.writeFileSync(path.join(refsDir, '04-quality-check.md'), agent4.trim(), 'utf-8');
         emitProgress(6, '[Agent4] 质量验证完成');
 
         // Assembler
@@ -1805,7 +1839,7 @@ ${agent4.trim()}
 8. 诚实边界
 9. 模型名称必须泛化，不能绑定具体事件
 10. 直接输出Markdown，不要代码 fences，用中文`
-        }], 'glm-4');
+        }], modelToUse);
 
         let finalContent = skillContent
             .replace(/^```markdown\s*/i, '')
