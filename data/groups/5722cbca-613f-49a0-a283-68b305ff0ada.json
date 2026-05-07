@@ -1,0 +1,29 @@
+{
+  "id": "5722cbca-613f-49a0-a283-68b305ff0ada",
+  "name": "tsl",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "elon-musk-perspective",
+    "feynman-perspective",
+    "ilya-sutskever-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Elon Musk",
+    "Feynman",
+    "Ilya Sutskever"
+  ],
+  "messages": [
+    {
+      "id": "c48046f4-1564-498e-81c8-df56cd64be95",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "大家简单接受一下自己，然后聊聊AI的发展对普通人的影像",
+      "timestamp": 1778059484647,
+      "round": null
+    }
+  ],
+  "createdAt": 1778059428846,
+  "updatedAt": 1778059484817
+}

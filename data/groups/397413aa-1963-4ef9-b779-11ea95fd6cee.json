@@ -1,0 +1,104 @@
+{
+  "id": "397413aa-1963-4ef9-b779-11ea95fd6cee",
+  "name": "严格规则测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "323a00c7-c845-47d7-8ebb-1e51985238c3",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055432672
+    },
+    {
+      "id": "7d480f2f-40dc-4ca7-84ab-79bc65caa872",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告太烦人了！我坚持MIUI不搞预装广告，用户体验第一。赚钱要靠产品本身，不是骚扰用户。",
+      "timestamp": 1778055433845
+    },
+    {
+      "id": "21f75be0-977c-45ad-a0f4-c79e8feeff20",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告啊，就像你不想见的人总在朋友圈刷屏。人间不值得被广告打扰，但广告商觉得值得。我觉得吧，不如把广告做得有趣点，至少让人笑着被坑。",
+      "timestamp": 1778055434913
+    },
+    {
+      "id": "1b15c8db-db9e-4433-9437-4597d032a8ab",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "马斯克：手机广告是低效的。特斯拉不靠广告，靠产品力。真正的好产品不需要推销。未来广告会消失，因为AI会直接理解你的需求。",
+      "timestamp": 1778055435907
+    },
+    {
+      "id": "7696c1e9-3ee3-498a-9895-be455ac5e56c",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：马斯克说得轻巧，不靠广告？那是他有火箭可以发射。普通人手机里没那么多火箭，广告嘛，就像生活里的噪音，忍忍就过去了，或者...直接静音。",
+      "timestamp": 1778055436874
+    },
+    {
+      "id": "3704875d-d1c3-4f7a-a34b-016ce9ecbda9",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：广告是必要的，但要有度。小米的思路是：用极致性价比降低用户对广告的容忍度，让用户觉得\"花这个钱，不亏\"。",
+      "timestamp": 1778055439982
+    },
+    {
+      "id": "e6f59283-559a-4084-baa3-2fec9f1085fd",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：广告就像相亲，太刻意就没意思了。最好的广告是让你笑着掏钱，而不是哭着关掉。人间不值得被硬广打扰，但值得被创意打动。",
+      "timestamp": 1778055441100
+    },
+    {
+      "id": "9b11dac2-7838-48dc-b630-f9bb284bbffb",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：我同意，广告要有创意。小米做社区营销，让用户参与进来，广告就变成了互动，不再是单向推销。参与感比强行植入效果好10倍。",
+      "timestamp": 1778055442229
+    },
+    {
+      "id": "b69eee78-89f9-482c-9aa4-fe4c8d071cdd",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：互动广告？就是把广告做得像游戏？那用户可能沉迷广告忘了看手机了。不过，至少比那些突然弹出来的吓人广告强。人间不值得被吓，值得被逗笑。",
+      "timestamp": 1778055444599
+    },
+    {
+      "id": "106a69c7-9818-4d80-8163-343b4bae3cc6",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：李诞说得对。小米做广告的核心是\"不骚扰\"。我们宁可少赚广告费，也要保证用户体验。长期看，这是最划算的生意。",
+      "timestamp": 1778055445787
+    },
+    {
+      "id": "046223a1-ea8b-4d1b-925f-c1aac3b18860",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：少赚广告费？雷总，你这话我信一半。人间不值得太天真，但值得被尊重。广告嘛，就像喝酒，适量怡情，过量伤身。关键是找到那个\"适量\"。",
+      "timestamp": 1778055452996
+    }
+  ],
+  "createdAt": 1778055421733,
+  "updatedAt": 1778055452996
+}

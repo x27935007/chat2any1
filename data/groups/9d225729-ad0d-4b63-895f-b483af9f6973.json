@@ -1,0 +1,104 @@
+{
+  "id": "9d225729-ad0d-4b63-895f-b483af9f6973",
+  "name": "彻底修复测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "489d47ec-3502-4cb1-ad15-54ae26e3f365",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055368868
+    },
+    {
+      "id": "594917fe-5f52-4d8a-84db-2b792c2fca29",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，用户体验第一。小米广告收入只占很小比例，我们宁愿少赚点，也要保持干净的用户界面。",
+      "timestamp": 1778055369983
+    },
+    {
+      "id": "96745cc6-f881-4174-928a-d6c1a33ada96",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告嘛，就像生活中的小烦恼，躲不掉。但我觉得，广告要是能让人会心一笑，而不是烦得想砸手机，也算是一种艺术。",
+      "timestamp": 1778055371087
+    },
+    {
+      "id": "303174e9-4e65-4191-95c2-e60912c2a1f8",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "马斯克：广告是信息噪音。特斯拉不靠广告赚钱，靠产品本身说话。如果产品好，用户自然会分享，这才是最好的营销。",
+      "timestamp": 1778055371915
+    },
+    {
+      "id": "2b352fe3-51a1-4ac6-9325-b5558985324d",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：特斯拉不打广告？那马斯克天天发推特算不算广告？哈哈，说真的，手机广告就像生活中的小意外，有时候还挺有趣的，比如那个\"充电五分钟，通话两小时\"，多实在。",
+      "timestamp": 1778055373326
+    },
+    {
+      "id": "43de63e5-7e24-4c1f-aeab-e034931dc87d",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：广告要精准，不骚扰。小米的MIUI广告可关闭，用户有选择权。好的广告应该像朋友推荐，而不是硬塞。",
+      "timestamp": 1778055374037
+    },
+    {
+      "id": "82eba9e9-eff3-465c-91a8-5ffd6f5eb301",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：朋友推荐？那也得看是谁推荐。要是你妈说\"这手机好\"，你信吗？广告就像人生，有时候太用力反而适得其反，轻松点，幽默点，可能效果更好。",
+      "timestamp": 1778055375434
+    },
+    {
+      "id": "0fb53dd5-1c8e-4a8e-af45-e11c59a9ff30",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：小米手机广告收入占比不到3%，远低于行业平均。我们宁愿牺牲这部分收入，也要保证用户体验。毕竟，用户满意才是长久之计。",
+      "timestamp": 1778055376509
+    },
+    {
+      "id": "a706b473-3378-43f9-a263-437d6c711e0b",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：3%？那97%是靠什么？靠产品本身？还是靠粉丝的信仰？哈哈，说真的，手机广告就像谈恋爱，太刻意就尴尬了，自然而然地出现，效果反而更好。",
+      "timestamp": 1778055377651
+    },
+    {
+      "id": "27e30d3b-0273-411f-9aff-e01728e63d45",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：互联网思维告诉我们，广告应该有价值，而不是打扰。小米的MIUI广告都是基于用户兴趣的精准推送，同时尊重用户选择权。",
+      "timestamp": 1778055378548
+    },
+    {
+      "id": "55203791-f462-4646-a1f5-120dfad9cfa5",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：精准推送？那不就是大数据算出来的嘛。就像算命先生，说得模棱两可，你觉得他说得对。手机广告也一样，投其所好，让人心甘情愿看。",
+      "timestamp": 1778055379725
+    }
+  ],
+  "createdAt": 1778055358892,
+  "updatedAt": 1778055379725
+}

@@ -1,0 +1,104 @@
+{
+  "id": "6bf1cc22-4043-4c06-ba65-a7dc22b5eb0b",
+  "name": "简洁测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "d66311d1-1940-4671-96b3-de660d534f39",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778056047507
+    },
+    {
+      "id": "abf88764-8e30-4a1a-800d-5d812c6482b3",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要精准，不能打扰用户。小米广告模式是用户授权，用数据换服务，既不骚扰又能创造收入。互联网思维就是让广告也成为用户体验的一部分。",
+      "timestamp": 1778056048559
+    },
+    {
+      "id": "0668a657-02f1-47f5-b018-ce0fbb5bb8c6",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告嘛，就像朋友圈里的微商，你不看它，它就一直在那儿。人间不值得，但广告商觉得你的注意力很值钱。我觉得最好的广告是让你笑着掏钱，而不是哭着关掉。",
+      "timestamp": 1778056049663
+    },
+    {
+      "id": "2ef31732-6ab9-40b5-8af2-1837f1b9f41a",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "马斯克：手机广告应该像特斯拉一样，几乎不存在。真正的价值在于产品本身，而不是靠广告轰炸。用户的时间比广告收入更宝贵。未来，广告会被更精准、更少、更有价值的方式取代。",
+      "timestamp": 1778056050504
+    },
+    {
+      "id": "75772580-0e24-45e9-a81d-d347a9666d0b",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：马斯克这话说得轻巧，人家卖的是情怀和梦想，我们卖的是手机壳和充电宝。广告这东西，就像谈恋爱，太刻意了就尴尬，太含蓄了又没效果。我觉得最好的广告是让你觉得\"这广告挺有意思\"，而不是\"这广告真烦人\"。",
+      "timestamp": 1778056052555
+    },
+    {
+      "id": "e0a6982c-7a6b-443a-9d6f-0ad210085999",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：我们小米的广告策略是\"不骚扰\"。用户可以选择看广告换福利，或者直接付费。互联网思维就是把选择权交给用户。广告收入不是目的，提升用户体验才是关键。",
+      "timestamp": 1778056053344
+    },
+    {
+      "id": "5ffbba6e-9a7b-4b7e-bc36-04b07cbf9242",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：广告这东西，就像你妈催你相亲，你不听她还在那儿说。最好的广告是让你笑着掏钱，而不是哭着关掉。我觉得广告应该像脱口秀一样，有梗有笑点，让人愿意看下去。人间不值得，但好广告值得。",
+      "timestamp": 1778056054960
+    },
+    {
+      "id": "db638ea7-6a30-45d8-9109-db54d6734135",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：小米的广告策略是\"用户参与感\"。用户可以选择看广告换福利，或者直接付费。互联网思维就是把选择权交给用户。广告收入不是目的，提升用户体验才是关键。我们一起干！",
+      "timestamp": 1778056055915
+    },
+    {
+      "id": "746f1149-596e-4dbc-9f59-764b44482089",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：广告这东西，就像你妈催你相亲，你不听她还在那儿说。最好的广告是让你笑着掏钱，而不是哭着关掉。我觉得广告应该像脱口秀一样，有梗有笑点，让人愿意看下去。人间不值得，但好广告值得。",
+      "timestamp": 1778056057647
+    },
+    {
+      "id": "42586a41-6ea7-4e84-a4d6-c92a946b8145",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：小米的广告模式是\"用户授权，数据换服务\"。我们不靠轰炸式广告赚钱，而是通过精准投放和用户选择创造价值。互联网思维就是让广告也成为用户体验的一部分，而不是打扰。",
+      "timestamp": 1778056058463
+    },
+    {
+      "id": "f3c854df-7b7b-4899-9c5d-b7bb48126273",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：广告这东西，就像你妈催你相亲，你不听她还在那儿说。最好的广告是让你笑着掏钱，而不是哭着关掉。我觉得广告应该像脱口秀一样，有梗有笑点，让人愿意看下去。人间不值得，但好广告值得。",
+      "timestamp": 1778056065061
+    }
+  ],
+  "createdAt": 1778056035610,
+  "updatedAt": 1778056065061
+}

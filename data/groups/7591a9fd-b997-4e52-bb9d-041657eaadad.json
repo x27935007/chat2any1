@@ -1,0 +1,17 @@
+{
+  "id": "7591a9fd-b997-4e52-bb9d-041657eaadad",
+  "name": "完整测试群",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "ilya-sutskever-perspective",
+    "elon-musk-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Ilya Sutskever",
+    "Elon Musk"
+  ],
+  "messages": [],
+  "createdAt": 1778124245313,
+  "updatedAt": 1778124245313
+}

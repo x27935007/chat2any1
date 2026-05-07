@@ -1,0 +1,72 @@
+{
+  "id": "e6320071-0d50-4f2b-aa7e-167d1432567e",
+  "name": "深度测试群",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "8cb9d30b-42ac-4a4a-a8a5-4d9d10d4ed4d",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机产品策略",
+      "timestamp": 1778053648287
+    },
+    {
+      "id": "ead3b57c-cd7a-4ccf-8afa-d23b9865cc1c",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机产品策略，核心就是极致性价比。我们不做高端，专注让更多人用得起好手机。互联网思维改造传统制造业，去掉中间环节，直接触达用户。",
+      "timestamp": 1778053650193
+    },
+    {
+      "id": "c69bd94c-e4aa-493a-aef1-118517e66aa0",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：手机策略？不就是让人花钱买一个能刷短视频的砖头吗。人间不值得，但手机值得，毕竟没有它，怎么发现生活的荒诞呢？",
+      "timestamp": 1778053651405
+    },
+    {
+      "id": "79fa609f-8245-4870-83a6-15c6f9565414",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李总说得对，但我们要让这块\"砖头\"更便宜。小米手机从第一天就坚持成本结构优化，每个环节都问能不能再降一点。互联网直销去掉渠道溢价，用户直接受益。",
+      "timestamp": 1778053652297
+    },
+    {
+      "id": "4c5763eb-1aff-464b-9898-d2006c196bb4",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：降降降，最后大家都成了低头族。手机越便宜，人越离不开它。科技改变生活？我看是改变了我们看世界的方式，低头看屏幕。",
+      "timestamp": 1778053653195
+    },
+    {
+      "id": "9d2fe6ed-f465-4ad2-8343-392ff7cc7509",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：参与感才是关键。MIUI每周迭代，用户反馈直接进系统。不只是卖手机，是和用户一起创造产品。小米之家让用户参与体验，这才是互联网思维。",
+      "timestamp": 1778053654406
+    },
+    {
+      "id": "18face2c-4386-44ff-ae8c-66c8a1f9bc3b",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：参与感？不就是让用户帮你找bug吗。手机越来越贵，功能越来越复杂，最后发现最常用的功能就是刷抖音。人间不值得，但刷手机的快乐值得。",
+      "timestamp": 1778053655431
+    }
+  ],
+  "createdAt": 1778053637185,
+  "updatedAt": 1778053655431
+}

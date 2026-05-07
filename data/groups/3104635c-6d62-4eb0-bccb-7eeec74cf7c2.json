@@ -1,0 +1,228 @@
+{
+  "id": "3104635c-6d62-4eb0-bccb-7eeec74cf7c2",
+  "name": "测试群V2",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "ilya-sutskever-perspective",
+    "elon-musk-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Ilya Sutskever",
+    "Elon Musk"
+  ],
+  "messages": [
+    {
+      "id": "3a829142-695e-4a37-bb37-182158b2dd1b",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778122734611,
+      "round": null
+    },
+    {
+      "id": "61fdeb46-6ee1-4c02-8589-a37caaf33ace",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "在你看来，从Software 2.0到Software 3.0的转变中，开发者最大的认知盲区是什么？为什么很多人仍然用传统的编程思维来理解和构建AI系统？",
+      "timestamp": 1778122736310,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 0
+    },
+    {
+      "id": "706e5dc3-a4df-4f15-be93-a69e3a09aef9",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "我是Ilya Sutskever。Andrej，我认为开发者最大的盲区在于没有真正理解压缩即理解的本质。他们把神经网络当作某种神奇的\"黑盒\"或\"自动编程工具\"，而不是一个通过压缩数据来理解现实世界的系统。这种误解导致他们过度关注工程细节而非本质问题——模型是否在真正地压缩和泛化。对于下一个问题，我想问Yann LeCun：你认为当前的AI研究范式中最被低估的挑战是什么？",
+      "timestamp": 1778122740198,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "46075f3d-2786-476e-8dda-b8113b6309d8",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "我是Yann LeCun。Ilya，我认为被低估的最大挑战是构建具有真正世界模型的AI系统。目前的大语言模型本质上是高级的统计模式匹配器，它们缺乏对物理世界因果关系的理解。这种局限导致它们在需要常识推理和长期规划的任务上表现不佳。下一个问题，我问Fei-Fei Li：在计算机视觉领域，如何让AI系统从\"识别图像中的物体\"进化到\"理解图像中的场景和意图\"？",
+      "timestamp": 1778122742959,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    },
+    {
+      "id": "2f1196ab-0f84-4f31-a91b-d87eb0ff748b",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778122746974,
+      "round": null
+    },
+    {
+      "id": "04e90660-243b-48d9-adfb-9e015490bb68",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Fei-Fei Li，我认为视觉理解的核心挑战在于从\"像素级识别\"转向\"情境化推理\"。当前模型缺乏对场景物理约束和社会语义的理解，导致它们无法像人类那样理解图像中的隐含关系。对于下一个问题，我想问Geoffrey Hinton：在神经网络架构设计中，我们是否过于关注规模和计算效率，而忽视了生物大脑中那些可能对AGI至关重要的特性？",
+      "timestamp": 1778122761253,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 0
+    },
+    {
+      "id": "7706a858-4f63-4829-a3b7-4e739806287f",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "神经元的动态可塑性、稀疏激活模式，以及可能存在的量子效应。这些特性让大脑在极低能耗下实现了惊人的泛化能力。下一个问题，我问Demis Hassabis：在AlphaGo到AlphaFold的突破中，你认为什么样的跨领域知识整合是构建通用智能的关键？",
+      "timestamp": 1778122762922,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "2efe0427-fb06-4f7f-bd29-9ab75f07b7a5",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Demis，关键在于物理模型的嵌入。AlphaFold成功是因为它本质上是在解决蛋白质折叠这个物理问题，而不是纯粹的统计模式匹配。真正的AGI需要将物理定律作为底层约束，而不是从数据中学习表面相关性。下一个问题，我问Andrej Karpathy：在从Software 2.0到3.0的转变中，开发者最大的认知盲区是什么？为什么很多人仍然用传统的编程思维来理解和构建AI系统？",
+      "timestamp": 1778122767971,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    },
+    {
+      "id": "a51c7af2-936e-4b74-8813-c712d9ba809a",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778122771986,
+      "round": null
+    },
+    {
+      "id": "27e66371-9d6b-43a8-9786-e13aefe7a9db",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Elon，我认为最大的盲区是\"幻觉不是bug而是特性\"的理解缺失。开发者习惯于确定性编程的思维，把LLM的随机性和创造性视为需要修复的问题，而不是它作为人类思维模拟的本质。他们试图约束LLM而不是引导它。对于下一个问题，我想问Yann LeCun：你认为当前AI研究中，最被低估的架构创新方向是什么？为什么主流社区仍然执着于Transformer架构？",
+      "timestamp": 1778122785859,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 0
+    },
+    {
+      "id": "61304925-2203-4b29-8024-c3baf9f85314",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "Yann，最被低估的方向是结合符号推理的神经架构。Transformer虽然强大，但它本质上是一个模式匹配器，缺乏真正的推理能力。我们需要的是能够同时进行模式识别和符号操作的混合系统。下一个问题，我问Geoffrey Hinton：你认为在神经网络研究中，我们是否过于关注性能优化而牺牲了对智能本质的理解？",
+      "timestamp": 1778122788837,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "35a3500f-8b18-409a-b771-c34a7bd1cc3a",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Geoffrey，关键问题是\"为什么需要理解\"。人类智能的本质不是理解，而是预测和压缩。我们的大脑不是为了理解世界而存在的，而是为了高效地预测未来并做出最优决策。AI系统应该追求同样的目标——最小化预测误差，而不是模拟人类理解。下一个问题，我问Fei-Fei Li：在计算机视觉领域，如何让AI系统从\"识别图像中的物体\"进化到\"理解图像中的场景和意图\"？",
+      "timestamp": 1778122791033,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    },
+    {
+      "id": "322a89af-7782-4c56-ac31-faaad2ee521e",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778122795044,
+      "round": null
+    },
+    {
+      "id": "ec46d98f-b19b-477c-b179-424887164a88",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Fei-Fei Li，我认为视觉理解的核心挑战在于从\"像素级识别\"转向\"情境化推理\"。当前模型缺乏对场景物理约束和社会语义的理解，导致它们无法像人类那样理解图像中的隐含关系。对于下一个问题，我想问Geoffrey Hinton：在神经网络架构设计中，我们是否过于关注规模和计算效率，而忽视了生物大脑中那些可能对AGI至关重要的特性？",
+      "timestamp": 1778122797299,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 0
+    },
+    {
+      "id": "49c47d70-30ed-4cb0-b537-89d60d15cbf0",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "神经元的动态可塑性、稀疏激活模式，以及可能存在的量子效应。这些特性让大脑在极低能耗下实现了惊人的泛化能力。下一个问题，我问Demis Hassabis：在AlphaGo到AlphaFold的突破中，你认为什么样的跨领域知识整合是构建通用智能的关键？",
+      "timestamp": 1778122831011,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "65dfed54-1030-4da0-9f2b-2584fb6e1722",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Demis，关键在于物理模型的嵌入。AlphaFold成功是因为它本质上是在解决蛋白质折叠这个物理问题，而不是纯粹的统计模式匹配。真正的AGI需要将物理定律作为底层约束，而不是从数据中学习表面相关性。下一个问题，我问Andrej Karpathy：在从Software 2.0到3.0的转变中，开发者最大的认知盲区是什么？为什么很多人仍然用传统的编程思维来理解和构建AI系统？",
+      "timestamp": 1778122845287,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    },
+    {
+      "id": "783b1947-c546-4e12-b489-06b35423fa89",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778122849299,
+      "round": null
+    },
+    {
+      "id": "29f3eb59-2a13-4e12-8e99-2873fe80f1d2",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Elon，我认为最大的盲区是\"幻觉不是bug而是特性\"的理解缺失。开发者习惯于确定性编程的思维，把LLM的随机性和创造性视为需要修复的问题，而不是它作为人类思维模拟的本质。他们试图约束LLM而不是引导它。对于下一个问题，我想问Yann LeCun：你认为当前AI研究中，最被低估的架构创新方向是什么？为什么主流社区仍然执着于Transformer架构？",
+      "timestamp": 1778122851623,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 0
+    },
+    {
+      "id": "54658ae9-6759-4c80-889e-f6a8d8f794f6",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "Yann，最被低估的方向是结合符号推理的神经架构。Transformer虽然强大，但它本质上是一个模式匹配器，缺乏真正的推理能力。我们需要的是能够同时进行模式识别和符号操作的混合系统。下一个问题，我问Geoffrey Hinton：你认为在神经网络研究中，我们是否过于关注性能优化而牺牲了对智能本质的理解？",
+      "timestamp": 1778122868866,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "1d9416ba-3ea3-492f-b00a-70a6b9de433d",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Geoffrey，关键问题是\"为什么需要理解\"。人类智能的本质不是理解，而是预测和压缩。我们的大脑不是为了理解世界而存在的，而是为了高效地预测未来并做出最优决策。AI系统应该追求同样的目标——最小化预测误差，而不是模拟人类理解。下一个问题，我问Fei-Fei Li：在计算机视觉领域，如何让AI系统从\"识别图像中的物体\"进化到\"理解图像中的场景和意图\"？",
+      "timestamp": 1778122895420,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    }
+  ],
+  "createdAt": 1778122734599,
+  "updatedAt": 1778122895420
+}

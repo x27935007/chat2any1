@@ -1,0 +1,104 @@
+{
+  "id": "2a4f1c61-fd0f-4938-9b0b-3e03e2953853",
+  "name": "简化测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "027b7020-b5db-4cd6-a17d-2adfe919496b",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055500286
+    },
+    {
+      "id": "6c449bff-9e3a-4489-865d-baf3116ca68e",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告应该像朋友推荐，不是打扰。我们MIUI的广告收入全部投入研发，用户体验和商业要平衡。",
+      "timestamp": 1778055501826
+    },
+    {
+      "id": "1f8dbc97-7180-49e2-92be-399de80890a1",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告嘛，就像生活里的推销，有点烦但躲不开。我觉得广告要是能让人笑一笑，而不是烦一烦，就挺好。毕竟人间不值得，但好广告值得被记住。",
+      "timestamp": 1778055509194
+    },
+    {
+      "id": "9167a15f-88f8-4b95-9abd-148cd43be9ee",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李总说得对。广告要有趣有用，小米社区用户共创的广告内容转化率更高。关键是让用户觉得\"这广告懂我\"，而不是\"这广告烦人\"。",
+      "timestamp": 1778055510314
+    },
+    {
+      "id": "be2ead64-f751-4342-900a-3327f65eb257",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：懂你的广告？那不就是精准投喂吗？我觉得最好的广告是让人看完想分享的那种，不是那种看完就想卸载APP的。幽默是最好的广告，对吧？",
+      "timestamp": 1778055511391
+    },
+    {
+      "id": "9a5deadb-b23a-4eb7-9b59-bfbe9f55ad84",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：幽默确实重要。小米新品预热时用段子手，转化率提升30%。但核心还是产品本身够硬，广告只是锦上添花。没有好产品，再幽默的广告也是空中楼阁。",
+      "timestamp": 1778055512864
+    },
+    {
+      "id": "b9bf00bf-62cd-44b3-9195-39e649fee093",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：产品硬不硬，用户说了算。广告再好，产品不行，就是\"皇帝的新衣\"。我觉得广告应该像朋友聊天，自然不刻意，让人看完觉得\"这广告有点东西\"，而不是\"这广告有点烦人\"。",
+      "timestamp": 1778055514346
+    },
+    {
+      "id": "c5dd670c-2d89-4370-a567-994208259088",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：说得好。小米的广告策略就是\"让用户成为主角\"。MIUI里80%的广告内容由用户创作，他们既是观众也是创作者。参与感强了，广告就不是打扰，而是共鸣。",
+      "timestamp": 1778055515869
+    },
+    {
+      "id": "c486f9f3-92ee-45f1-ac45-4d2fcad3c7a6",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：用户创作广告？这主意不错！不过我觉得最好的广告是那种让人看完笑出声，然后顺手就买了。毕竟人间不值得，但好笑的东西值得被分享，好用的产品值得被购买，对吧？",
+      "timestamp": 1778055520069
+    },
+    {
+      "id": "9d41e8d1-dff6-406f-88d2-a73af8f93c9c",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：雷军：没错。小米测试过，幽默广告点击率比普通广告高2.5倍。但关键是幽默要自然，不能硬拗。就像我们小米发布会，段子背后是真实的产品力。没有真材实料，再幽默也是昙花一现。",
+      "timestamp": 1778055521483
+    },
+    {
+      "id": "db45d6ef-f698-486a-9195-06a75a2879f3",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：幽默广告确实好，但我觉得广告的最高境界是让人看完觉得\"这广告有点东西\"，而不是\"这广告有点烦人\"。就像脱口秀，笑完还能想想，这才是好广告。毕竟人间不值得，但好广告值得被记住。",
+      "timestamp": 1778055523066
+    }
+  ],
+  "createdAt": 1778055489442,
+  "updatedAt": 1778055523066
+}

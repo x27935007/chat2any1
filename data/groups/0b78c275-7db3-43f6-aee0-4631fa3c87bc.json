@@ -1,0 +1,25 @@
+{
+  "id": "0b78c275-7db3-43f6-aee0-4631fa3c87bc",
+  "name": "test4",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "ilya-sutskever-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Ilya Sutskever"
+  ],
+  "messages": [
+    {
+      "id": "2147888e-ea33-44cb-ad71-d15a28deac0e",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "Hello",
+      "timestamp": 1778136866355,
+      "round": null
+    }
+  ],
+  "createdAt": 1778136866321,
+  "updatedAt": 1778136866929
+}

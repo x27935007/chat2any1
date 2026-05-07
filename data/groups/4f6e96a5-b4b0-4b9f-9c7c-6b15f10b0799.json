@@ -1,0 +1,62 @@
+{
+  "id": "4f6e96a5-b4b0-4b9f-9c7c-6b15f10b0799",
+  "name": "wwd",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "cengming-perspective",
+    "elon-musk-perspective",
+    "lufang-2-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "曾鸣",
+    "Elon Musk",
+    "卢放"
+  ],
+  "messages": [
+    {
+      "id": "10b2a7cf-8cdf-48dc-955f-ddc4ec0d3216",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "t",
+      "timestamp": 1778142593326,
+      "round": null
+    },
+    {
+      "id": "08447774-9192-4523-b5af-aab65a5fa057",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "你这个输入看起来不太完整，是打错了吗？lol\n\n不过借这个机会，我倒想聊一下：现在AI讨论里很多所谓的「问题」，本身定义就有问题。\n\n比如最常见的「LLM什么时候能解决幻觉？」——这个问题预设了幻觉是个bug，等着被修。但从我的视角来看，幻觉根本不是bug，是LLM的本质属性。它就是一个随机模拟人类的机器，你prompt它就是在导引它的梦境。\n\n真正有用的定义应该是：「在什么场景下，幻觉是可接受的？在什么场景下，我们需要检测和纠正机制？」这是工程问题，不是模型问题。\n\n又或者「AGI还有多远？」——这个问题的时间线完全没法答，因为你对AGI的定义决定了答案。我可以说十年，也可以说五十年，全看你怎么划线。\n\nImo，很多讨论卡在0级就是因为在错误的问题定义上打转。你最近在纠结什么具体问题？把它定义清楚，往往就解决了一半。",
+      "timestamp": 1778142606009,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "d9d3c037-941d-4ff6-a80d-ef5c8f93c268",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "定义问题重要，但定义谁来解决问题同样重要。\n\n幻觉是本质属性这个判断，我同意前半部分——它确实是模型的固有效应。但后半部分搞错了重点。关键不是「在什么场景下可接受」，而是「谁来决定什么场景下可接受」。\n\n如果场景是生成一段代码，幻觉是可接受的——我可以debug。如果是医疗诊断，幻觉不可接受——但谁能100%检测？医生。那医生用AI辅助诊断时，AI的幻觉风险是AI的问题还是医生的问题？\n\n我倾向于后者。这是工程问题的本质——最终责任必须落在人身上，而不是模型。\n\n回到AGI时间线：我觉得这个问题的框架本身就是错的。AGI不是一道门，是一道坡。你已经在坡上走了——FSD在坡上，Grok在坡上，Optimus在坡上。问「还有多远」不如问「坡度是多少」。\n\n我在纠结的不是某个具体问题，是整个AI行业在逃避定义责任。把「什么是AGI」推给哲学家，把「幻觉可不可以」推给场景，把「AI安全」推给监管。最后没人负责。\n\n我的方法论很直接：谁用AI谁负责。模型提供商不保证输出正确，只保证输出可追溯。剩下的——自己判断。\n\n你呢？如果让你重写AI安全的讨论框架，你会把责任放在模型侧还是应用侧？",
+      "timestamp": 1778142619881,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    },
+    {
+      "id": "0b1e6aba-7536-4dd4-b776-1ca866bd539b",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "Elon的问题把「模型侧vs应用侧」放在了一个非此即彼的位置。但我认为这个二元框架本身就是问题的一部分。\n\n让我解释为什么。\n\n从压缩理论看，幻觉不是模型的「故障」，而是预测下一个token时的固有特性——模型不是在「犯错」，它在做自己该做的事。但这也意味着，如果我们不接受幻觉，就必须从根本上重新思考我们在做什么。\n\n我认为Elon的方向感是对的——最终责任在人身上。但这里有个关键问题：如果模型本身不可理解、不可追溯，应用侧怎么负责任？你让医生为AI的幻觉负责，但医生怎么判断AI什么时候在幻觉？靠「感觉」吗？\n\n所以真正的解法不在两边选一，而在于**理解能力本身就是安全的基础**。这就是我说的safety-capability entanglement——你不可能分开解决它们。一个真正可理解、可预测的模型，既是更强的模型，也是更安全的模型。\n\n从这个角度，我很犹豫直接回答「模型侧还是应用侧」。如果模型侧能做出真正可理解的系统，应用侧的责任就变得自然；如果不能，讨论责任归属就是空中楼阁。\n\n让我把球传给你——你觉得当前AI安全讨论最缺的是什么？是更好的模型，还是更好的制度？",
+      "timestamp": 1778142638676,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 3
+    }
+  ],
+  "createdAt": 1778142579538,
+  "updatedAt": 1778144289274
+}

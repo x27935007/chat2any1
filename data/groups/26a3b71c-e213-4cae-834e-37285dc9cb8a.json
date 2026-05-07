@@ -1,0 +1,104 @@
+{
+  "id": "26a3b71c-e213-4cae-834e-37285dc9cb8a",
+  "name": "无角色设定测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "569014e7-2cd7-4a8c-8f91-d5e023b91d93",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055835633
+    },
+    {
+      "id": "bed510a2-9cb1-48c1-af0f-7f701854b9da",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，用户反感。小米坚持少广告，用户体验优先。广告收入不是核心，靠硬件和生态赚钱。",
+      "timestamp": 1778055837184
+    },
+    {
+      "id": "eb2726a3-0b9b-4ac1-b534-ecb6eeba318c",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：手机广告？不如想想手机怎么让人更开心。广告太多，手机比老板还烦。人间不值得，手机也不值得被广告轰炸。",
+      "timestamp": 1778055840322
+    },
+    {
+      "id": "83597fd7-a64f-4666-b55e-b773fdcea493",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "马斯克：广告应该为用户提供价值，而非打扰。Tesla不投放传统广告，靠产品说话。手机广告应该像内容一样有用，而非干扰。",
+      "timestamp": 1778055841664
+    },
+    {
+      "id": "feaaab5a-3f55-429c-a7bd-1bf96bbd793d",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：马斯克说得对，但太理想化了。手机广告就像生活里的噪音，躲不掉。不如接受它，然后笑一笑。人间不值得，但手机里的广告更不值得。",
+      "timestamp": 1778055843389
+    },
+    {
+      "id": "11690875-dc58-4068-8c2f-cfa470ad9af3",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：手机广告要克制，用户体验优先。小米坚持少广告，靠硬件和生态赚钱。广告太多，用户会流失。我们的模式证明，不靠广告也能成功。",
+      "timestamp": 1778055848266
+    },
+    {
+      "id": "e9d1803a-da92-44b0-b564-efd41b0e01a4",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：手机广告？不如想想手机怎么让人更开心。广告太多，手机比老板还烦。人间不值得，手机也不值得被广告轰炸。",
+      "timestamp": 1778055854449
+    },
+    {
+      "id": "c9b2133f-2883-406e-9a87-c345632aa06b",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：李总说得对，但用户需要选择。小米的互联网服务是可选的，不强制。我们让用户自己决定要不要看广告，尊重用户选择。",
+      "timestamp": 1778055856030
+    },
+    {
+      "id": "e909345d-697c-4d44-9902-81a8ec96c4e5",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：选择？手机上哪有选择。打开APP就是广告，关不掉。不如接受现实，然后自嘲一下。人间不值得，手机广告更不值得生气。",
+      "timestamp": 1778055858087
+    },
+    {
+      "id": "bbf9bce4-9489-4cb3-8e41-91df44ad5d8d",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：互联网思维告诉我们，用户用脚投票。小米坚持少广告，用户才会持续选择我们。广告短期赚钱，长期损害品牌。我们要做长期主义。",
+      "timestamp": 1778055859650
+    },
+    {
+      "id": "3bcb0f67-0f8a-4aee-ae1c-0590d26e4165",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：长期主义？说得轻松。手机更新换代比广告还快。不如活在当下，少点广告，多点开心。人间不值得，但开心值得。",
+      "timestamp": 1778055867745
+    }
+  ],
+  "createdAt": 1778055824629,
+  "updatedAt": 1778055867745
+}

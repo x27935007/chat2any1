@@ -1,0 +1,72 @@
+{
+  "id": "3e71a817-a38c-4147-aaa4-e2bb17c381d1",
+  "name": "最终深度测试群",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "d7ed589a-9bbe-47d6-b530-0cb5a0f3daca",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机产品策略",
+      "timestamp": 1778053703152
+    },
+    {
+      "id": "2bc2b455-2502-436f-b4cb-bed8a4c76c98",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机策略核心是极致性价比。我们不做低配高价，要给用户最好的体验。互联网思维+用户参与感，每周迭代MIUI，让用户参与共创。生态链协同，单个产品不追求高利润，靠生态整体盈利。",
+      "timestamp": 1778053706819
+    },
+    {
+      "id": "a4bf9f1c-5725-4d4a-8cbb-09167d508cbc",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机策略啊？我觉得就是让人开心。别太复杂，能打电话能刷视频就行。人太执着参数，其实开心才是最好的参数。人间不值得，但一部好手机值得。",
+      "timestamp": 1778053713114
+    },
+    {
+      "id": "4b0a0b86-e5dd-4690-9b20-62bd096d90df",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "马斯克：手机应该像特斯拉一样，是AI终端。硬件只是载体，软件和AI才是未来。手机应该能自动驾驶你的生活，不只是通讯工具。我们会让手机成为你身体的延伸。",
+      "timestamp": 1778053714272
+    },
+    {
+      "id": "dedd0aad-f896-49f3-92d5-e4859ac64243",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：AI终端？听着就累。手机不就是拿来刷抖音、发朋友圈的吗？非要搞那么复杂。简单点，开心点，人间不值得，但刷短视频值得。",
+      "timestamp": 1778053715105
+    },
+    {
+      "id": "d55312ed-c389-4677-b1f6-d1da533eadcb",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：马斯克：AI是方向，但用户体验更重要。小米的策略是让AI普惠，让普通用户也能享受科技乐趣。我们不追求最贵，但追求最实用的AI体验。大家一起参与，共同进化。",
+      "timestamp": 1778053716410
+    },
+    {
+      "id": "62e5a3ef-9927-4e29-bb35-f9ea1cc8a27c",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：参与进化？听着好累。我觉得手机策略就是让人少焦虑。参数再多，不开心也是白搭。人间不值得，但刷手机时笑一笑值得。",
+      "timestamp": 1778053717266
+    }
+  ],
+  "createdAt": 1778053691708,
+  "updatedAt": 1778053717266
+}

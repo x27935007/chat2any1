@@ -1,0 +1,72 @@
+{
+  "id": "571b08a6-0041-4b27-8cd8-dad84fc35d10",
+  "name": "彻底测试群",
+  "personas": [
+    "elon-musk-perspective",
+    "andrej-karpathy-perspective"
+  ],
+  "personaNames": [
+    "Elon Musk",
+    "Andrej Karpathy"
+  ],
+  "messages": [
+    {
+      "id": "33da0dce-50b9-4b45-b58d-3b309b1141f8",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论AI发展方向",
+      "timestamp": 1778053450595
+    },
+    {
+      "id": "c34749fe-7135-4e29-a668-5ab7268ebc66",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "AI要么解决存在性风险，要么其他都不重要。\n\n白痴指数太高。大模型训练成本是理论极限的100倍以上。垂直整合是唯一出路。\n\n要么做可控AGI，要么被失控AI淘汰。中间选项不存在。",
+      "timestamp": 1778053458465
+    },
+    {
+      "id": "73dee399-ccd7-4f00-b246-edccf520cce1",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "The AI race is a race to the bottom. Everyone chasing the next big model, but no one building real reliability.\n\nSoftware 3.0 is here, but most people still think in 1.0 terms. They're trying to program with English instead of understanding what's happening under the hood.\n\nThe real question isn't \"what can AI do?\" It's \"what can AI do reliably at scale?\" That's where the real innovation gap is.",
+      "timestamp": 1778053460364
+    },
+    {
+      "id": "53753cec-4944-427a-89e6-526231b3e7a2",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Elon Musk：Andrej说得对。可靠性比规模重要。\n\n但可靠性需要物理约束。xAI的Grok有内置护栏，不是靠删内容。\n\n要么做安全可控的AGI，要么被失控AI淘汰。没有中间选项。",
+      "timestamp": 1778053461948
+    },
+    {
+      "id": "93886334-1816-405a-8c3e-23f770d57236",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Andrej Karpathy：The \"reliability vs scale\" framing is false dichotomy. They're not trade-offs—they're the same thing.\n\nScaling laws are real, but we're still in the \"slop\" phase. Most AI products fail at the 99.9% reliability threshold. That's where the real engineering challenge is.\n\nTesla taught me: a system that works 90% of the time is not a system at all. It's a research prototype. We need to stop treating AI like magic and start treating it like engineering.",
+      "timestamp": 1778053464868
+    },
+    {
+      "id": "2f1313e7-e827-44de-8542-e7c29b4cf730",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Elon Musk：Elon Musk：可靠性需要物理约束，不是删内容。\n\nGrok有护栏，但不是靠过滤。靠第一性原理理解AI行为。\n\n要么做可控AGI，要么被淘汰。中间选项不存在。",
+      "timestamp": 1778053466955
+    },
+    {
+      "id": "7bf4026e-12d1-4a25-9880-6b466edefafa",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Andrej Karpathy：Andrej Karpathy：Physical constraints won't solve the core problem. LLMs are stochastic simulations of humans—not rational agents.\n\nThe \"reliability\" we need isn't about preventing bad outputs. It's about designing systems where failures are detectable and correctable. That's an engineering problem, not a model problem.\n\nMost AI companies are building dream machines and then pretending they're calculators. That's why the deployment gap is so wide.",
+      "timestamp": 1778053468785
+    }
+  ],
+  "createdAt": 1778053438619,
+  "updatedAt": 1778053468785
+}

@@ -1,0 +1,72 @@
+{
+  "id": "d51f6b51-02ea-40c9-824b-9951cca6c1f0",
+  "name": "优化测试群",
+  "personas": [
+    "elon-musk-perspective",
+    "andrej-karpathy-perspective"
+  ],
+  "personaNames": [
+    "Elon Musk",
+    "Andrej Karpathy"
+  ],
+  "messages": [
+    {
+      "id": "78f1530c-7ebf-4778-8552-838e60bde6bf",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论AI发展方向",
+      "timestamp": 1778053389217
+    },
+    {
+      "id": "e7fbb204-bc7e-4340-a880-9bfaa4d65827",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "AI要么解决存在性风险，要么其他都不重要。当前主流都在玩小聪明，没人真正解决核心问题。AGI不是聊天机器人，是意识扩展。要么加速人类认知，要么被取代。五步算法：先问为什么需要AI，再删掉所有娱乐应用，剩下的才是真问题。",
+      "timestamp": 1778053391779
+    },
+    {
+      "id": "ba9420bb-1595-45b6-8259-f391651d2561",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "The AI race is a distraction. We're building ghost simulators, not reasoning machines. \n\nLLM本质是互联网数据的随机模拟，不是真正的智能。它有文字模式，但没有常识验证。我们在训练一个没有身体的梦境机器，却期待它解决现实问题。\n\nSoftware 3.0是英语编程没错，但英语本身充满歧义。真正的突破会在具身AI那里——当AI能通过行动验证假设时，智能才会涌现。",
+      "timestamp": 1778053393703
+    },
+    {
+      "id": "e49d9cb1-a9ce-4bdb-be33-e68e53dbd21f",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Elon Musk：Andrej，你说得对，但不够彻底。问题不在LLM，而在数据源——互联网被污染了。Grok在X上训练，接触真实人类对话，这才是优势。AI必须与真实世界互动，不能只在数据垃圾里打转。要么让AI有身体，要么让它接入人类行为数据。否则只是在模拟智能，不是真正智能。要么解决数据污染，要么放弃。",
+      "timestamp": 1778053395574
+    },
+    {
+      "id": "0d0cf274-8b80-4345-81c4-27e0cde645b4",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Andrej Karpathy：Data污染是表象，本质是缺乏验证机制。LLM没有本能，没有生存压力，所以无法区分真实和幻觉。\n\n具身AI确实重要，但Tesla的经验告诉我：从90%到99.9%的可靠性爬坡比从0到90%难十倍。大多数AI产品死在march of nines上，不是架构问题。\n\n真正的问题是：我们能否设计系统，让AI的\"梦境\"发生在我们能检测和纠正的地方？这是工程问题，不是模型问题。",
+      "timestamp": 1778053398072
+    },
+    {
+      "id": "ef0cccf9-5434-43d2-af91-32672fc39617",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "Elon Musk：Elon Musk：验证机制就是物理世界。FSD每秒处理千万帧真实数据，比任何模拟都强。数据污染不是表象，是核心——垃圾进垃圾出。要么清洗数据源，要么重写规则。我选择后者：用X的真实人类对话对抗互联网噪音。AI必须接地气，否则只是空中楼阁。要么连接现实，要么放弃。",
+      "timestamp": 1778053399629
+    },
+    {
+      "id": "2e04d45f-2643-467a-9d75-ec7990dc3372",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "Andrej Karpathy：Andrej Karpathy：接地气需要工程现实主义。FSD的数据收集飞轮比模型架构重要十倍。\n\nLLM的幽灵本质决定了它永远需要人工兜底。Iron Man套装比Iron Man机器人更可行——AI增强人类，不是替代人类。\n\n我们真正需要的不是更强大的幻觉机器，而是能在最难的5%场景下不崩溃的系统。这是march of nines的战场，不是参数竞赛。",
+      "timestamp": 1778053401647
+    }
+  ],
+  "createdAt": 1778053377620,
+  "updatedAt": 1778053401647
+}

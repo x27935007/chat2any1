@@ -1,0 +1,104 @@
+{
+  "id": "34d9ab59-0625-4cde-a844-0127c8f0b185",
+  "name": "只保留用户消息测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "b0e8a6c2-c1ae-417e-a74b-907416de4f9f",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055766266
+    },
+    {
+      "id": "0a597aa4-3059-47d7-8728-9004a86e32e5",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，用户注意力是宝贵的资源。小米坚持少广告、不骚扰原则，用户体验第一。",
+      "timestamp": 1778055767503
+    },
+    {
+      "id": "97427c15-e649-4aef-9a82-bc0a07be1fbf",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告？不就是那些让你刚看完一个视频，下一秒就给你推同类产品的算法吗？人间不值得，但广告商觉得你的注意力很值钱。",
+      "timestamp": 1778055768720
+    },
+    {
+      "id": "6a0fe3d9-c518-47c1-a843-25d5f1e0cc58",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李总说得对，但广告也可以有价值。小米的广告是精准的，不打扰用户，还能让产品更便宜。我们一起做有温度的广告。",
+      "timestamp": 1778055769513
+    },
+    {
+      "id": "7972faa6-0dc9-4236-a57e-339c44c7ffb3",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：温度？手机广告的温度就是\"您已获得VIP特权，只需再看30秒广告\"吧。人间不值得，但广告商觉得你的时间很值钱。",
+      "timestamp": 1778055770626
+    },
+    {
+      "id": "0270fad8-3544-44a7-a279-88de2b55b9eb",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：李总调侃得妙。但小米的广告是用户选择的结果，MIUI用户可以关闭所有广告。我们相信，尊重用户才能长久。",
+      "timestamp": 1778055771665
+    },
+    {
+      "id": "dbd6d274-30bb-4ef8-bb98-06b7f90d511a",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：选择？就像\"免费使用，但要看广告\"这种选择题。人间不值得，但广告商觉得你的注意力很值钱。笑一笑，广告就过去了。",
+      "timestamp": 1778055772901
+    },
+    {
+      "id": "32e7dc9a-f592-4e8a-978b-bd2b3368a376",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：李总幽默感十足。小米的互联网思维是：用户参与感+精准投放。广告不是打扰，是提供有价值的信息。我们一起探索更好的方式。",
+      "timestamp": 1778055773813
+    },
+    {
+      "id": "c679e06d-81d9-4fdf-8965-15984dc6fa58",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：信息？就是那些\"您的手机已老化，该换新款了\"的提醒吧。人间不值得，但广告商觉得你的钱包很值钱。笑一笑，钱包就捂紧了。",
+      "timestamp": 1778055775265
+    },
+    {
+      "id": "3cf5a88d-c122-48d0-85a7-7b24cb99ce69",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：雷军：李总太会调侃了。小米手机靠性价比赢得用户，不是靠广告轰炸。我们的广告投入不到营收的3%，行业平均是8%。数字不会说谎。",
+      "timestamp": 1778055776245
+    },
+    {
+      "id": "42b94b20-0f0c-4543-8298-bf606d9bcad7",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：数字？就是那些\"点击率提升30%\"的指标吧。人间不值得，但广告商觉得你的点击很值钱。笑一笑，指标就上去了。",
+      "timestamp": 1778055779039
+    }
+  ],
+  "createdAt": 1778055754773,
+  "updatedAt": 1778055779039
+}

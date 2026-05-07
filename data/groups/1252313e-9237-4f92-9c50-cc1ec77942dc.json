@@ -1,0 +1,56 @@
+{
+  "id": "1252313e-9237-4f92-9c50-cc1ec77942dc",
+  "name": "新测试群",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "edaa7f7f-f1da-480b-8b80-72fc9940b164",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "你好",
+      "timestamp": 1778052398373
+    },
+    {
+      "id": "10817eea-40d2-42f4-9c69-441bfecf6d41",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "大家好，我是雷军。小米科技创始人，互联网思维践行者。让我们一起创造更好的科技产品！",
+      "timestamp": 1778052399243
+    },
+    {
+      "id": "e34725f4-f6e6-426f-81e7-6f0bbc845dca",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "雷军：大家好，我是雷军。小米科技创始人，互联网思维践行者。让我们一起创造更好的科技产品！",
+      "timestamp": 1778052406160
+    },
+    {
+      "id": "2327c9fd-dd4a-4b4c-a8eb-838efa771784",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：互联网思维就是用工具和方法论改造传统行业。去掉渠道溢价，数据驱动决策，快速迭代。",
+      "timestamp": 1778052406960
+    },
+    {
+      "id": "41e02b3a-0d9e-4908-85d2-189b385556ec",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：互联网思维？就是把卖手机的套路，变成卖一切生活的套路。人间不值得，但小米值得。",
+      "timestamp": 1778052407928
+    }
+  ],
+  "createdAt": 1778052387932,
+  "updatedAt": 1778052407928
+}

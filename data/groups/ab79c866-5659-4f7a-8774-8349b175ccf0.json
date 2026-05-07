@@ -1,0 +1,104 @@
+{
+  "id": "ab79c866-5659-4f7a-8774-8349b175ccf0",
+  "name": "最终多轮测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "706283fd-8da7-45eb-9651-d8c33e37013f",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055276314
+    },
+    {
+      "id": "70d9f328-ce0f-497b-8d4e-b391da4f24f6",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，不能打扰用户体验。小米坚持少广告，甚至无广告，把用户体验放在第一位。用户愿意为好的体验买单，这才是长久之道。",
+      "timestamp": 1778055277832
+    },
+    {
+      "id": "f256239b-fcd8-49bc-955b-393db3c5e876",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：手机广告？我手机里那些弹窗广告，比我妈催婚还烦。人间不值得，但我的手机值得清净点吧？",
+      "timestamp": 1778055278930
+    },
+    {
+      "id": "42704be2-5d86-46b1-8a49-1c7e0e7ff786",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李诞说得对，广告太多确实烦人。小米手机广告少，甚至很多功能完全无广告。用户愿意为好的体验付费，这才是正道。",
+      "timestamp": 1778055280758
+    },
+    {
+      "id": "e3582bae-7559-426e-b4b3-b3ef4658f96a",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：雷总，广告这事啊，就像脱口秀的包袱，抖多了就腻了。少而精，才能让人记住。毕竟，谁喜欢被天天推销呢？",
+      "timestamp": 1778055281609
+    },
+    {
+      "id": "ed60cd97-0a29-4884-8255-05dfae3ac08d",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：没错，广告要像小米的产品一样，给用户真正的价值。我们宁愿少赚广告费，也要让用户用得舒心。体验好了，用户自然愿意买单。",
+      "timestamp": 1778055283115
+    },
+    {
+      "id": "038727fe-f21e-44ac-ac37-983f43229437",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：雷总，你看，这就是差距。我手机里的APP，十个有八个想给我推销东西。人间不值得，但用户的耐心更不值钱啊。",
+      "timestamp": 1778055284138
+    },
+    {
+      "id": "6335711c-3b8a-48f8-bf17-b91209db25fb",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：李诞说得对，广告太多确实伤用户体验。小米手机坚持少广告策略，很多功能完全无广告。用户愿意为好的体验付费，这才是长久之道。",
+      "timestamp": 1778055285673
+    },
+    {
+      "id": "ae624665-e703-49f9-894e-11b720caf81b",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：手机广告就像相亲，太主动反而吓跑人。幽默一点，真诚一点，用户才会心甘情愿看你表演。毕竟，谁喜欢被强行推销呢？",
+      "timestamp": 1778055286559
+    },
+    {
+      "id": "7ef04ea3-cc9b-4a51-89b5-2c3fada507bd",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：雷军：没错，广告要克制。小米手机广告少，甚至很多功能完全无广告。用户愿意为好的体验付费，这才是正道。我们一起打造更好的用户体验。",
+      "timestamp": 1778055287928
+    },
+    {
+      "id": "b6c01332-a5e6-4ec4-90cb-f7115ee490fe",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：雷总，你看，这就是差距。我手机里的APP，十个有八个想给我推销东西。人间不值得，但用户的耐心更不值钱啊。",
+      "timestamp": 1778055289333
+    }
+  ],
+  "createdAt": 1778055265536,
+  "updatedAt": 1778055289333
+}

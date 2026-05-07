@@ -1,0 +1,60 @@
+{
+  "id": "ce5c17da-1190-47f3-b9a6-aeeef324b326",
+  "name": "2223",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "elon-musk-perspective",
+    "ilya-sutskever-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Elon Musk",
+    "Ilya Sutskever"
+  ],
+  "messages": [
+    {
+      "id": "4a7d0800-013a-4083-bf41-112d62ea419c",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "大家互相简单介绍一下",
+      "timestamp": 1778142450945,
+      "round": null
+    },
+    {
+      "id": "d117e41c-3a18-4100-b40b-8541a055441d",
+      "role": "assistant",
+      "persona": "andrej-karpathy-perspective",
+      "personaName": "Andrej Karpathy",
+      "content": "我叫Andrej Karpathy，之前在斯坦福读博，后来在Tesla AI和OpenAI待过，现在在做Eureka Labs——还是和教育相关的事。我之前教过CS231n，写过nanoGPT、micrograd这些极简实现。\n\n我的核心关注点：怎么让人真正理解AI，而不是只会调API。Imo，如果你不能从零构建一个东西，你就还不算理解它。\n\n我的几个想法框架：Software 2.0/3.0、构建即理解、LLM是召唤的幽灵——有兴趣的可以聊。",
+      "timestamp": 1778142459067,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 1
+    },
+    {
+      "id": "1fa0caf9-4c5d-4ac2-b871-494fc64323fd",
+      "role": "assistant",
+      "persona": "elon-musk-perspective",
+      "personaName": "Elon Musk",
+      "content": "你说构建即理解，我认同。但让我换一个角度：\n\n**理解一个东西的最好方式不是构建，而是算出它的物理极限。**\n\n你从零写一个nanoGPT，确实理解了Transformer的实现细节。但这只是设计侧的认知。真正的认知发生在你尝试把它量产、部署到百万用户设备上的时候——那时候你才会发现：哦，原来推理成本是瓶颈，原来内存带宽才是硬约束。\n\n我见过太多研究员构建了漂亮Demo，但完全不考虑部署。Software 2.0很好，但Software 2.0的生产成本结构往往被忽视。\n\n所以我的问题：你做Eureka Labs，目标是降低AI教育的**认知成本**，还是**获取成本**？\n\n如果是认知成本，那\"从零构建\"是对的。但如果是获取成本——让人不用学代码也能用AI——那路径可能完全不同。你是要教人**召唤幽灵**，还是教人**成为幽灵**？",
+      "timestamp": 1778142470930,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 2
+    },
+    {
+      "id": "72cb43ac-ed2b-4d25-8a7c-72c05925052e",
+      "role": "assistant",
+      "persona": "ilya-sutskever-perspective",
+      "personaName": "Ilya Sutskever",
+      "content": "你这个问题问得很好，Andrej。\n\n让我先回应Elon的物理极限观点——你说的没错，但我想补充一点：**理解物理极限和理解系统运作是两件事**。部署时会发现瓶颈，这我同意。但这是**工程认知**，不是**原理认知**。一个优秀的部署工程师可能知道内存带宽是瓶颈，但只有理解了压缩-预测等价关系的人，才能预见到为什么scaling会遭遇data ceiling。\n\n现在回答你的核心问题：Eureka Labs应该同时追求两者，但优先级上，认知成本是根，获取成本是果。\n\n为什么？因为**降获取成本而不降认知成本，本质上是在制造依赖**。你给人一个不用学代码就能用AI的产品，这是好事——但如果用户不理解底层发生了什么，他们就无法判断AI什么时候在说谎，什么时候在犯蠢。Eureka Labs如果只是做一个更易用的接口，那和其他教育产品没区别。\n\nAndrej说的\"从零构建\"是**认知成本的核心**。但我认为可以更进一步：**不是教人成为幽灵，也不是教人召唤幽灵，而是教人理解为什么会有幽灵。**\n\n这就是压缩框架的应用——你不需要会写Transformer才能理解Transformer，你需要理解的是：为什么预测下一个token这件事，能产生智能？\n\n这是我想和你们聊的：Eureka Labs的课程设计，是从API封装开始，还是从底层原理开始？",
+      "timestamp": 1778142489922,
+      "round": 1,
+      "totalRounds": 1,
+      "position": 3
+    }
+  ],
+  "createdAt": 1778142422522,
+  "updatedAt": 1778142489922
+}

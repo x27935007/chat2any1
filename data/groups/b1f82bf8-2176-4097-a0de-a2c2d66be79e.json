@@ -1,0 +1,63 @@
+{
+  "id": "b1f82bf8-2176-4097-a0de-a2c2d66be79e",
+  "name": "简化测试群",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "ilya-sutskever-perspective",
+    "elon-musk-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Ilya Sutskever",
+    "Elon Musk"
+  ],
+  "messages": [
+    {
+      "id": "9af8ad2e-07d7-48d6-9ffd-8ae0953d6b11",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778135598754,
+      "round": null
+    },
+    {
+      "id": "234cd88d-2a33-465e-9521-cb51823de95f",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778135602756,
+      "round": null
+    },
+    {
+      "id": "f95317ae-8a2b-4865-848e-281fe8eea518",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778135606399,
+      "round": null
+    },
+    {
+      "id": "489fb0e6-0750-4ee6-9107-c79032b87345",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778135609977,
+      "round": null
+    },
+    {
+      "id": "1aebfc81-c4fe-459d-ba25-8fa4faf57707",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "说出自己的名字，并给下一位出一个问题，下一位应该回答上一位的问题，并追问下一位，以此类推",
+      "timestamp": 1778135613758,
+      "round": null
+    }
+  ],
+  "createdAt": 1778135598740,
+  "updatedAt": 1778135614541
+}

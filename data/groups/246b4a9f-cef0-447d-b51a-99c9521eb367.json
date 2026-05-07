@@ -1,0 +1,56 @@
+{
+  "id": "246b4a9f-cef0-447d-b51a-99c9521eb367",
+  "name": "测试群",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "747f55b8-746a-4cda-8f2e-edb99ccd2177",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "你好",
+      "timestamp": 1778052328272
+    },
+    {
+      "id": "bc7a3283-1b1f-4746-8f4d-02de1c1e8984",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "大家好！我是雷军，小米创始人。很高兴和大家交流。互联网思维+极致性价比，我们一起创造科技乐趣！",
+      "timestamp": 1778052329367
+    },
+    {
+      "id": "96dccfc6-d261-468d-b20d-965a03445d33",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：雷总好，互联网思维能不能先解决我早上找不到另一只袜子的问题？人间不值得，但小米值得。",
+      "timestamp": 1778052330291
+    },
+    {
+      "id": "b59496b4-4f41-41e0-a4a7-a116b1958f98",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：袜子问题用物联网解决！智能衣柜+AI识别，一起把生活变得更简单。性价比就是让每个人都能享受科技乐趣。",
+      "timestamp": 1778052331230
+    },
+    {
+      "id": "283e381f-72ef-4833-8bb4-3235c2bfa9cd",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：雷总，我需要的是能自动配对的袜子，不是更复杂的系统。简单点，再简单点，人间已经够复杂了。",
+      "timestamp": 1778052332449
+    }
+  ],
+  "createdAt": 1778052315176,
+  "updatedAt": 1778052332449
+}

@@ -1,0 +1,113 @@
+{
+  "id": "69d24439-85b7-4161-bfd5-088fd4e0dedc",
+  "name": "无角色测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "0ba47ba1-495a-43c1-abb4-95705bbdbd0f",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778056147473
+    },
+    {
+      "id": "dd3a4bf8-dff3-4838-b0cd-0007849403f0",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，不能打扰用户体验。我们的理念是\"专注、极致、口碑、快\"，广告也是产品的一部分。用户反感广告，那就做有价值的广告，而不是骚扰。",
+      "timestamp": 1778056148589
+    },
+    {
+      "id": "df769d2b-4220-445d-97b4-57388340bbb1",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告太吵了，像菜市场一样。其实好产品自己会说话，不用靠广告轰炸。人间不值得，但你的手机值得安静。",
+      "timestamp": 1778056165804
+    },
+    {
+      "id": "459c2635-b137-4051-85e1-32d0fbc9fb68",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李总说得对，但广告是商业必需。小米的做法是：精准、不骚扰、有价值。用户数据告诉我们，个性化广告点击率比传统广告高30%，同时我们严格控制广告频率。",
+      "timestamp": 1778056167424
+    },
+    {
+      "id": "ee8ed028-267f-4fef-a2d2-0dbcd65069c9",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：精准广告更可怕，它知道你的一切。就像有个老在你家门口晃悠的人，还知道你喜欢吃什么。不如直接点，广告就说：\"我想要你的钱\"，多真诚啊。",
+      "timestamp": 1778056169192
+    },
+    {
+      "id": "7251c494-d70c-442b-9061-9891df59b2f4",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：李总幽默。但广告不只是要钱，更是要价值交换。我们MIUI的广告收入反哺系统开发，让系统更流畅。用户可以选择关闭，这是参与感的体现。",
+      "timestamp": 1778056170183
+    },
+    {
+      "id": "f2b777b7-0874-4b66-98f3-a4fd8e5f36a6",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：人间不值得，但关闭广告按钮值得。最幽默的广告是那种你根本没意识到是广告的，比如你本来就想买的东西突然出现在首页，这叫\"心想事成\"式广告。",
+      "timestamp": 1778056171539
+    },
+    {
+      "id": "d2979f16-9650-471b-a20b-66696c98e43a",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：李总说得对！最好的广告是\"无感但有价值\"。我们正在测试场景化推荐，比如你刚查完天气预报，就推荐雨伞，而不是硬塞广告。这才是互联网思维，让广告成为服务的一部分。",
+      "timestamp": 1778056172663
+    },
+    {
+      "id": "f8ed14e2-ad8e-4c8e-a464-dfc57e5d739b",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：广告就像爱情，太刻意就尴尬。最好的广告是\"你刚好需要，我刚好有\"。但手机广告往往是\"我不需要，但我必须看\"，这就像强迫相亲，谁开心？",
+      "timestamp": 1778056174305
+    },
+    {
+      "id": "61b54f92-86dc-46ce-9ea5-47a4a0a75cf7",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：雷军：雷军：李总比喻生动。小米的解决之道是\"用户选择权\"。我们让用户决定看什么广告，不看什么广告，甚至用广告积分换福利。把广告变成用户可以掌控的东西，而不是强加的负担。",
+      "timestamp": 1778056175521
+    },
+    {
+      "id": "46072523-5451-4720-8852-436127b2925c",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：广告积分？这就像监狱里说\"表现好可以多放风\"。不如直接说：我们不靠广告赚钱，靠产品本身。可惜，人间现实是，广告是商业模式的一部分，就像熬夜是年轻人的日常，明知不好，停不下来。",
+      "timestamp": 1778056177504
+    },
+    {
+      "id": "fa6caa00-2d29-448d-8e7d-729801740033",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "你好，大家互相认识一下",
+      "timestamp": 1778057241976,
+      "round": null
+    }
+  ],
+  "createdAt": 1778056134400,
+  "updatedAt": 1778057252378
+}

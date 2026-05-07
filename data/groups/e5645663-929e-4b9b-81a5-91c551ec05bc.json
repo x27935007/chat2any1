@@ -1,0 +1,104 @@
+{
+  "id": "e5645663-929e-4b9b-81a5-91c551ec05bc",
+  "name": "最终修复测试",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "c4dc9253-50c1-402e-a474-08fd04770916",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055688540
+    },
+    {
+      "id": "54d498d3-1d41-43e6-bd7f-15abfc8c65f8",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，不能打扰用户体验。我们小米的广告收入主要来自系统级优化，不是骚扰用户。广告应该有价值，比如实用功能推荐，而不是纯流量变现。",
+      "timestamp": 1778055689824
+    },
+    {
+      "id": "e8688bc5-5235-497f-9414-eadcf90f6473",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "手机广告啊，就像生活里的意外惊喜，通常是惊吓。用户买手机是为了不被打扰，结果开机就广告？这逻辑好像买房子还得先听半小时销售演讲。人间不值得，不值得被广告轰炸。",
+      "timestamp": 1778055690873
+    },
+    {
+      "id": "e9565d48-6556-4376-a20f-9b22d3c31c0f",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "马斯克：手机广告应该像特斯拉一样，几乎没有。真正的产品价值不需要靠广告轰炸来支撑。用户时间才是最宝贵的资源，不应该被浪费在低质量内容上。我们宁愿不做广告，也要专注产品体验。",
+      "timestamp": 1778055692011
+    },
+    {
+      "id": "e0e83bec-a0ed-4930-94e5-3e0f277f8bc7",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：马斯克这话说得像在火星上生活。没有广告？那程序员吃什么？人间不值得，但程序员要吃饭啊。广告就像生活里的蚊子，讨厌但赶不走，除非你能造个没蚊子的手机。",
+      "timestamp": 1778055696544
+    },
+    {
+      "id": "82749304-651a-4b85-a006-85255507fec4",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李诞说得对，广告确实需要存在。但我们小米的广告策略是\"有价值的广告\"——比如实用的应用推荐、系统功能提示。关键是控制频率和位置，不打扰用户核心体验。用户愿意为有用信息付费注意力。",
+      "timestamp": 1778055697903
+    },
+    {
+      "id": "010a3154-50fb-47a7-a7a3-c74ff279fa7b",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：有用信息？那叫内容，不叫广告。广告就是\"看我看我看我\"的尖叫，就像地铁里发传单的。手机里塞广告，就像在浴缸里养鱼——地方小，还总想跳出来。不如直接点，\"你刷我赚钱\"。",
+      "timestamp": 1778055699285
+    },
+    {
+      "id": "a4603a9c-2dbc-4afb-82ab-edd1d9211b30",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：李太犀利了。但广告可以更优雅。我们MIUI的广告都放在系统设置里，用户主动才能看到。就像小米之家，体验第一，销售第二。用户愿意为好体验买单，广告只是服务的一部分，不是全部。",
+      "timestamp": 1778055703160
+    },
+    {
+      "id": "a1b43cb0-fad5-4adb-a49e-9dce1eae9b80",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：优雅的广告？这就像说\"温柔的抢劫\"。放在系统设置里？用户买手机是为了设置广告吗？这逻辑像说\"我们餐厅的菜不好吃，但洗手间很干净\"。人间不值得，不值得为广告找借口。",
+      "timestamp": 1778055704503
+    },
+    {
+      "id": "f245730a-2f54-4800-a0c4-508fab73cc8a",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：李兄说得对，广告确实不该打扰用户。但小米的广告收入主要用于补贴硬件成本，让手机更便宜。我们给用户选择权——可以付费去广告，也可以接受广告换取更低价格。用户应该有选择权，而不是被强制接受。",
+      "timestamp": 1778055707585
+    },
+    {
+      "id": "7b6917b2-52ef-477d-a37c-0c1c780ef2be",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：选择权？就像问\"您想被蚊子咬还是被蜜蜂蛰\"。都是咬！手机便宜几百块，换来一辈子广告骚扰？这算盘打得比脱口秀演员还精。人间不值得，不值得为这点便宜出卖灵魂。",
+      "timestamp": 1778055709464
+    }
+  ],
+  "createdAt": 1778055677408,
+  "updatedAt": 1778055709464
+}

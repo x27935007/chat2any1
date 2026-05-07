@@ -1,0 +1,36 @@
+{
+  "id": "3762a854-8250-4881-b542-cc6ab03c05b3",
+  "name": "test",
+  "personas": [
+    "andrej-karpathy-perspective",
+    "ilya-sutskever-perspective",
+    "elon-musk-perspective"
+  ],
+  "personaNames": [
+    "Andrej Karpathy",
+    "Ilya Sutskever",
+    "Elon Musk"
+  ],
+  "messages": [
+    {
+      "id": "72f84a52-0056-48dc-a5e0-9e7d0c5590b9",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "互相介绍并给下一位提出一个问题",
+      "timestamp": 1778136213575,
+      "round": null
+    },
+    {
+      "id": "7335cb25-48dd-4438-bc78-09dd7e325c58",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "Hello",
+      "timestamp": 1778136484974,
+      "round": null
+    }
+  ],
+  "createdAt": 1778136188323,
+  "updatedAt": 1778136485879
+}

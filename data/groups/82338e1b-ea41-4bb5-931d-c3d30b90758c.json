@@ -1,0 +1,104 @@
+{
+  "id": "82338e1b-ea41-4bb5-931d-c3d30b90758c",
+  "name": "JSON测试群",
+  "personas": [
+    "leijun-perspective",
+    "li-dan-perspective"
+  ],
+  "personaNames": [
+    "雷军",
+    "李诞"
+  ],
+  "messages": [
+    {
+      "id": "89cb934a-533c-4d0d-b6d6-23cdb8faaf12",
+      "role": "user",
+      "persona": null,
+      "personaName": "你",
+      "content": "讨论手机广告",
+      "timestamp": 1778055610446
+    },
+    {
+      "id": "3c6604be-0ad1-4402-a907-6d38f8fd8710",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "手机广告要克制，用户体验第一。我宁愿少赚点，也不让用户反感。广告收入是锦上添花，不是主业。",
+      "timestamp": 1778055611912
+    },
+    {
+      "id": "2a7eb923-7469-4f0f-89ed-20dc132a0909",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：手机广告？就是让你花钱买了个广告牌，还得自己扛回家。人间不值得，但手机广告更不值得。",
+      "timestamp": 1778055612750
+    },
+    {
+      "id": "152408da-7f5c-4368-81d7-659d2379035c",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：李总说得幽默，但广告确实能降低产品价格。关键是做到用户可接受，有价值，不骚扰。我们MIUI广告收入全部反哺系统优化。",
+      "timestamp": 1778055613366
+    },
+    {
+      "id": "ac361aca-763f-41be-bb94-764610dee09a",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：反哺？广告养活系统，用户养活广告。这圈套玩得挺溜啊。不过，反正手机都是广告牌，能用就行，对吧？",
+      "timestamp": 1778055614463
+    },
+    {
+      "id": "238adfe8-75d0-4014-8f00-39b172c64ca2",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：互联网思维就是让广告有价值。不是骚扰，是精准推荐。用户需要的信息才是好广告。我们通过算法实现，用户满意度还提高了。",
+      "timestamp": 1778055620466
+    },
+    {
+      "id": "3f56c5c2-04df-42e9-8dd2-cdb16118e58d",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：算法精准？精准到我刚想买啥，手机就告诉我\"您可能需要\"。这哪是推荐，这是读心术啊！不过，算了，反正人间不值得，手机广告也不值得较真。",
+      "timestamp": 1778055622545
+    },
+    {
+      "id": "f989dbf8-56cc-4cf9-8e0f-bc7f0aa519ad",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：参与感很重要。用户可以关闭广告，也可以反馈。我们每周迭代，根据用户调整。广告不是目的，是手段，目的是更好的用户体验。",
+      "timestamp": 1778055623587
+    },
+    {
+      "id": "b13b90dd-006e-4c5e-abd6-b8f0a306c5e5",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：关闭广告？那我还要花时间研究怎么关。不如直接收费，省心。反正都是交易，何必装得像送礼物。人间不值得，但诚实值得。",
+      "timestamp": 1778055624634
+    },
+    {
+      "id": "8274ccc3-9a31-481c-8131-974f20181391",
+      "role": "assistant",
+      "persona": "leijun-perspective",
+      "personaName": "雷军",
+      "content": "雷军：雷军：雷军：雷军：雷军：雷军：商业模式要平衡。小米坚持硬件综合净利润率不超过5%，靠服务和生态赚钱。广告是服务的一部分，不是主要收入来源。我们的目标是让更多人用得起好手机。",
+      "timestamp": 1778055626000
+    },
+    {
+      "id": "2fa3e641-699b-4ea4-a119-71f8733a574d",
+      "role": "assistant",
+      "persona": "li-dan-perspective",
+      "personaName": "李诞",
+      "content": "李诞：李诞：李诞：李诞：李诞：李诞：李诞：李诞：5%利润？那广告得赚多少才能填上这个坑啊。算了，反正手机都是广告牌，能用就行。不过话说回来，小米的广告确实比某些品牌含蓄点，这点值得肯定。",
+      "timestamp": 1778055627265
+    }
+  ],
+  "createdAt": 1778055599151,
+  "updatedAt": 1778055627265
+}
