@@ -738,23 +738,27 @@
         }
         @keyframes pulse { 0%,100%{opacity:1; box-shadow: 0 0 0 0 rgba(102,126,234,0.7);} 50%{opacity:0.6; box-shadow: 0 0 0 8px rgba(102,126,234,0);} }
 
-        .model-select {
+        .model-input-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+        }
+        .model-input {
             background: rgba(26, 26, 46, 0.9);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
-            padding: 11px 14px;
+            padding: 8px 12px;
             color: var(--color-text-primary);
             font-size: 13px;
-            cursor: pointer;
+            width: 120px;
             transition: all var(--transition-fast);
-            flex-shrink: 0;
         }
-        .model-select:focus {
+        .model-input:focus {
             outline: none;
             border-color: var(--color-primary);
             box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
-        .model-select:hover {
+        .model-input:hover {
             border-color: rgba(255,255,255,0.15);
         }
 
@@ -1194,7 +1198,9 @@
                 <div class="chat-header-actions">
                     <button class="header-action-btn">📞</button>
                     <button class="header-action-btn">📋</button>
-                    <button class="header-action-btn">⚙️</button>
+                    <div class="model-input-wrapper">
+                        <input type="text" id="modelInput" class="model-input" placeholder="模型" value="MiniMax-M2.5" title="输入AI模型code">
+                    </div>
                 </div>
             </div>
             <div class="chat-messages" id="dmMessages"></div>
@@ -1204,16 +1210,6 @@
                         <span class="dot"></span>
                         <span id="dmIndicatorName">-</span>
                     </div>
-                    <select id="modelSelect" class="model-select" title="选择AI模型">
-                        <option value="qwen-plus">通义千问 Plus</option>
-                        <option value="qwen-turbo">通义千问 Turbo</option>
-                        <option value="qwen-max">通义千问 Max</option>
-                        <option value="glm-4">GLM-4</option>
-                        <option value="glm-4-plus">GLM-4 Plus</option>
-                        <option value="MiniMax-M2.5" selected>MiniMax M2.5</option>
-                        <option value="abab6.5s">ABAB 6.5S</option>
-                        <option value="deepseek-v4-pro">DeepSeek V4 Pro</option>
-                    </select>
                     <textarea id="dmInput" placeholder="输入你的问题..." rows="1" disabled></textarea>
                     <button class="send-btn" id="dmSendBtn" onclick="sendDM()" disabled>发送</button>
                 </div>
@@ -1574,9 +1570,9 @@ async function sendDM() {
     msgs.appendChild(typingDiv);
     msgs.scrollTop = msgs.scrollHeight;
 
-    // 获取选定的模型
-    const modelSelect = document.getElementById('modelSelect');
-    const selectedModel = modelSelect ? modelSelect.value : 'MiniMax-M2.5';
+    // 获取输入的模型
+    const modelInput = document.getElementById('modelInput');
+    const selectedModel = modelInput ? modelInput.value : 'MiniMax-M2.5';
 
     try {
         const res = await fetch('/api/chat', {
