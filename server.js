@@ -864,8 +864,17 @@ const progressEmitter = new EventEmitter();
 
 // ============ 路由 ============
 
+// 测试端点
+app.get('/api/test', (req, res) => {
+    console.log('Test API called');
+    res.json({ message: 'Test API works!' });
+});
+
 // 获取支持的模型列表
 app.get('/api/models', (req, res) => {
+    console.log('API models called');
+    console.log('DEFAULT_MODEL:', DEFAULT_MODEL);
+    console.log('SUPPORTED_MODELS:', SUPPORTED_MODELS);
     res.json({
         defaultModel: DEFAULT_MODEL,
         models: SUPPORTED_MODELS
