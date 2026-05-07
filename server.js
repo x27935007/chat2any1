@@ -951,6 +951,9 @@ app.get('/api/persona/:id', (req, res) => {
 // DM对话
 app.post('/api/chat', async (req, res) => {
     const { personaId, question, history = [], model } = req.body;
+    console.log('=== Chat API called ===');
+    console.log('Request model:', model);
+    console.log('DEFAULT_MODEL:', DEFAULT_MODEL);
     if (!personaId || !question) return res.status(400).json({ error: 'Missing params' });
 
     const skillContent = loadSkillContent(personaId);
@@ -958,6 +961,7 @@ app.post('/api/chat', async (req, res) => {
 
     const personaName = getPersonaNameFromSkill(personaId);
     const modelToUse = model || DEFAULT_MODEL;
+    console.log('Using model:', modelToUse);
 
     const systemPrompt = `你是${personaName}的视角。严格遵循SKILL.md中的角色扮演规则。
 
