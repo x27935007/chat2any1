@@ -1,5 +1,27 @@
+# 日志文件
 server.log
-.env
 *.log
+
+# 环境变量
+.env
+config.json
+
+# 操作系统文件
 .DS_Store
+
+# Node.js 依赖
 node_modules/
+
+# 数据存储
+data/
+
+# 测试文件
+test*.js
+test_*.js
+
+# 编辑器配置
+.vscode/
+.idea/
+
+# Docker 相关
+docker-compose.override.yml

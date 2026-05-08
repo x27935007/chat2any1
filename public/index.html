@@ -138,6 +138,21 @@
         .user-avatar:hover {
             transform: scale(1.08);
             box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .user-avatar::after {
+            content: '⚙️';
+            position: absolute;
+            font-size: 10px;
+            bottom: -2px;
+            right: -2px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* === Main Layout === */
@@ -868,6 +883,7 @@
             margin-bottom: 6px;
             font-weight: 500;
         }
+        .form-label .required { color: #ef4444; margin-left: 2px; }
         .form-input {
             width: 100%;
             background: rgba(10, 10, 15, 0.6);
@@ -1130,7 +1146,7 @@
     <span class="subtitle">多人格AI思维对话</span>
     <div class="header-right">
         <button class="search-btn">🔍 搜索</button>
-        <div class="user-avatar">👤</div>
+        <div class="user-avatar" onclick="showSettings()">👤</div>
     </div>
 </header>
 
@@ -1194,7 +1210,6 @@
                 <div class="chat-header-actions">
                     <button class="header-action-btn">📞</button>
                     <button class="header-action-btn">📋</button>
-                    <button class="header-action-btn" id="settingsBtn" onclick="showSettings()">⚙️</button>
                 </div>
             </div>
             <div class="chat-messages" id="dmMessages"></div>
@@ -1359,24 +1374,24 @@
             <button class="modal-close" onclick="closeSettings()">×</button>
         </div>
         <div class="form-group">
-            <label class="form-label">大模型 API Key</label>
-            <input class="form-input" id="settingsApiKey" placeholder="输入百炼API Key">
+            <label class="form-label">大模型 API Key <span class="required">*</span></label>
+            <input class="form-input" id="settingsApiKey" placeholder="输入百炼API Key" required>
         </div>
         <div class="form-group">
             <label class="form-label">默认模型 Code</label>
-            <input class="form-input" id="settingsModel" placeholder="如：MiniMax-M2.5, qwen-turbo, glm-4" value="MiniMax-M2.5">
+            <input class="form-input" id="settingsModel" placeholder="如：deepseek-v4-pro, qwen-turbo, glm-4" value="deepseek-v4-pro">
         </div>
         <div class="form-group">
             <label class="form-label">支持的模型列表</label>
             <div class="model-tags" id="modelTags">
-                <span class="model-tag">MiniMax-M2.5</span>
+                <span class="model-tag">deepseek-v4-pro</span>
                 <span class="model-tag">qwen-turbo</span>
                 <span class="model-tag">qwen-plus</span>
                 <span class="model-tag">qwen-max</span>
                 <span class="model-tag">glm-4</span>
                 <span class="model-tag">glm-4-flash</span>
                 <span class="model-tag">abab6.5s</span>
-                <span class="model-tag">deepseek-v4-pro</span>
+                <span class="model-tag">MiniMax-M2.5</span>
             </div>
         </div>
         <div class="modal-actions">
@@ -1600,7 +1615,7 @@ async function sendDM() {
     msgs.scrollTop = msgs.scrollHeight;
 
     // 使用全局设置的模型
-    const selectedModel = currentModel || 'MiniMax-M2.5';
+    const selectedModel = currentModel || 'deepseek-v4-pro';
 
     try {
         const res = await fetch('/api/chat', {
@@ -1844,7 +1859,7 @@ function closeSummaryModal() {
 }
 
 // ============ Settings ============
-let currentModel = 'MiniMax-M2.5';
+let currentModel = 'deepseek-v4-pro';
 let currentApiKey = '';
 
 function showSettings() {
@@ -1868,8 +1883,15 @@ async function saveSettings() {
     const model = document.getElementById('settingsModel').value.trim();
     const apiKey = document.getElementById('settingsApiKey').value.trim();
     
+    if (!apiKey) {
+        alert('请输入 API Key');
+        document.getElementById('settingsApiKey').focus();
+        return;
+    }
+    
     if (!model) {
         alert('请输入模型 Code');
+        document.getElementById('settingsModel').focus();
         return;
     }
     

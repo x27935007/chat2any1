@@ -13,14 +13,37 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY || 'sk-523abe216d5840438177d9a355570639';
 const DASHSCOPE_BASE = 'dashscope.aliyuncs.com';
 const EXAMPLES_DIR = './nuwa-skill/examples';
 const REFERENCES_DIR = './nuwa-skill/references';
 const DATA_DIR = path.join(__dirname, 'data/groups');
+const CONFIG_FILE = path.join(__dirname, 'config.json');
 
-// 默认模型配置
-const DEFAULT_MODEL = process.env.DEFAULT_MODEL || 'MiniMax-M2.5';
+function loadConfig() {
+    try {
+        if (fs.existsSync(CONFIG_FILE)) {
+            const content = fs.readFileSync(CONFIG_FILE, 'utf-8');
+            return JSON.parse(content);
+        }
+    } catch (e) {
+        console.error('Failed to load config:', e);
+    }
+    return { dashscopeApiKey: '', defaultModel: 'deepseek-v4-pro' };
+}
+
+function saveConfig(config) {
+    try {
+        fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2), 'utf-8');
+        return true;
+    } catch (e) {
+        console.error('Failed to save config:', e);
+        return false;
+    }
+}
+
+const config = loadConfig();
+let DASHSCOPE_API_KEY = config.dashscopeApiKey || process.env.DASHSCOPE_API_KEY || '';
+let DEFAULT_MODEL = config.defaultModel || process.env.DEFAULT_MODEL || 'deepseek-v4-pro';
 
 // 支持的模型列表
 const SUPPORTED_MODELS = [
@@ -489,7 +512,7 @@ function extractKeyPoints(content, maxPoints = 3) {
 }
 
 // ============ LLM 调用 (阿里云百炼 OpenAI兼容接口) ============
-function callLLMOnce(messages, model = 'MiniMax-M2.5') {
+function callLLMOnce(messages, model = 'deepseek-v4-pro') {
     return new Promise((resolve, reject) => {
         const requestBody = {
             model,
@@ -542,7 +565,7 @@ function callLLMOnce(messages, model = 'MiniMax-M2.5') {
 
 async function callLLM(messages, model = null) {
     let lastErr;
-    const effectiveModel = model || (typeof GLOBAL_MODEL !== 'undefined' ? GLOBAL_MODEL : 'MiniMax-M2.5');
+    const effectiveModel = model || (typeof GLOBAL_MODEL !== 'undefined' ? GLOBAL_MODEL : 'deepseek-v4-pro');
     for (let i = 0; i < 3; i++) {
         try {
             return await callLLMOnce(messages, effectiveModel);
@@ -563,33 +586,180 @@ async function callLLM(messages, model = null) {
 }
 
 // ============ 通用函数 ============
-function slugify(name) {
-    const hasChinese = /[\u4e00-\u9fa5]/.test(name);
+const nameCache = {};
+
+async function queryEnglishName(chineseName) {
+    if (!chineseName || !/[\u4e00-\u9fa5]/.test(chineseName)) {
+        return null;
+    }
+    
+    if (nameCache[chineseName]) {
+        return nameCache[chineseName];
+    }
+    
+    try {
+        const messages = [{
+            role: 'user',
+            content: `请告诉我"${chineseName}"的英文名字，只需返回英文名，不要其他内容。如果不知道或没有英文名，请返回"null"。`
+        }];
+        
+        const response = await callLLM(messages, 'MiniMax-M2.5');
+        const englishName = response.trim();
+        
+        if (englishName && englishName.toLowerCase() !== 'null' && /^[a-zA-Z][a-zA-Z\s-]+$/.test(englishName)) {
+            nameCache[chineseName] = englishName;
+            return englishName;
+        }
+        
+        return null;
+    } catch (e) {
+        console.log('Failed to query English name:', e.message);
+        return null;
+    }
+}
+
+async function slugify(name) {
+    if (!name || typeof name !== 'string') {
+        return 'unnamed-perspective';
+    }
+    
+    const cleanedName = name.trim();
+    if (!cleanedName) {
+        return 'unnamed-perspective';
+    }
+    
+    if (/[a-zA-Z]/.test(cleanedName)) {
+        return cleanedName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-perspective';
+    }
+    
+    const englishName = await queryEnglishName(cleanedName);
+    if (englishName) {
+        return englishName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-perspective';
+    }
+    
     let base;
-    if (hasChinese) {
         try {
             const { execSync } = require('child_process');
-            const escapedName = name.replace(/'/g, "\\'");
+            const escapedName = cleanedName.replace(/'/g, "\\'");
             const py = execSync(
-                `python3 -c "from pypinyin import lazy_pinyin; print(''.join(lazy_pinyin('${escapedName}')))"`,
+                `python3 -c "from pypinyin import lazy_pinyin; print(''.join(lazy_pinyin('${escapedName}', style=0)))"`,
                 { encoding: 'utf-8' }
             ).trim();
             base = py.replace(/\s+/g, '-').toLowerCase();
+            if (!base || base.length < 2) {
+                throw new Error('Empty pinyin result');
+            }
         } catch (e) {
-            base = name
+            base = cleanedName
                 .replace(/[\u4e00-\u9fa5]/g, (char) => {
-                    const code = char.charCodeAt(0).toString(36);
-                    return 'c' + code;
+                    const pinyin = getSimplePinyin(char);
+                    return pinyin ? pinyin : char.charCodeAt(0).toString(36);
                 })
                 .replace(/\s+/g, '-')
                 .replace(/[^a-z0-9-]/g, '')
                 .toLowerCase();
         }
-    } else {
-        base = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     }
-    if (!base || base.length < 2) base = 'unnamed';
+    
+    if (!base || base.length < 2) {
+        base = 'unnamed';
+    }
+    
     return base + '-perspective';
+}
+
+function getSimplePinyin(char) {
+    const pinyinMap = {
+        '李': 'li', '王': 'wang', '张': 'zhang', '刘': 'liu', '陈': 'chen',
+        '杨': 'yang', '赵': 'zhao', '黄': 'huang', '周': 'zhou', '吴': 'wu',
+        '徐': 'xu', '孙': 'sun', '马': 'ma', '朱': 'zhu', '胡': 'hu',
+        '郭': 'guo', '何': 'he', '林': 'lin', '罗': 'luo', '高': 'gao',
+        '梁': 'liang', '谢': 'xie', '宋': 'song', '唐': 'tang', '许': 'xu',
+        '韩': 'han', '冯': 'feng', '邓': 'deng', '曹': 'cao', '彭': 'peng',
+        '曾': 'zeng', '肖': 'xiao', '田': 'tian', '董': 'dong', '袁': 'yuan',
+        '潘': 'pan', '于': 'yu', '蒋': 'jiang', '蔡': 'cai', '余': 'yu',
+        '杜': 'du', '叶': 'ye', '程': 'cheng', '苏': 'su', '魏': 'wei',
+        '吕': 'lv', '丁': 'ding', '任': 'ren', '沈': 'shen', '姚': 'yao',
+        '卢': 'lu', '姜': 'jiang', '崔': 'cui', '钟': 'zhong', '谭': 'tan',
+        '陆': 'lu', '汪': 'wang', '范': 'fan', '金': 'jin', '石': 'shi',
+        '廖': 'liao', '贾': 'jia', '夏': 'xia', '韦': 'wei', '傅': 'fu',
+        '方': 'fang', '白': 'bai', '邹': 'zou', '孟': 'meng', '熊': 'xiong',
+        '秦': 'qin', '邱': 'qiu', '侯': 'hou', '江': 'jiang', '尹': 'yin',
+        '薛': 'xue', '闫': 'yan', '段': 'duan', '雷': 'lei', '史': 'shi',
+        '龙': 'long', '陶': 'tao', '黎': 'li', '贺': 'he', '顾': 'gu',
+        '毛': 'mao', '郝': 'hao', '龚': 'gong', '邵': 'shao', '万': 'wan',
+        '钱': 'qian', '严': 'yan', '覃': 'qin', '武': 'wu', '戴': 'dai',
+        '莫': 'mo', '孔': 'kong', '向': 'xiang', '汤': 'tang', '常': 'chang',
+        '柴': 'chai', '华': 'hua', '屈': 'qu', '项': 'xiang', '祝': 'zhu',
+        '郑': 'zheng', '文': 'wen', '章': 'zhang', '可': 'ke', '爱': 'ai',
+        '美': 'mei', '好': 'hao', '中': 'zhong', '国': 'guo', '人': 'ren',
+        '大': 'da', '学': 'xue', '科': 'ke', '技': 'ji', '工': 'gong',
+        '程': 'cheng', '师': 'shi', '研': 'yan', '究': 'jiu', '员': 'yuan',
+        '经': 'jing', '理': 'li', '总': 'zong', '主': 'zhu', '任': 'ren',
+        '长': 'zhang', '先': 'xian', '生': 'sheng', '女': 'nv', '士': 'shi',
+        '小': 'xiao', '明': 'ming', '强': 'qiang', '伟': 'wei', '敏': 'min',
+        '杰': 'jie', '丽': 'li', '红': 'hong', '芳': 'fang', '燕': 'yan',
+        '玲': 'ling', '娜': 'na', '静': 'jing', '婷': 'ting', '涛': 'tao',
+        '军': 'jun', '勇': 'yong', '磊': 'lei', '鹏': 'peng', '飞': 'fei',
+        '刚': 'gang', '健': 'jian', '康': 'kang', '安': 'an', '全': 'quan',
+        '新': 'xin', '创': 'chuang', '智': 'zhi', '能': 'neng', '未': 'wei',
+        '来': 'lai', '慧': 'hui', '发': 'fa', '展': 'zhan', '前': 'qian',
+        '景': 'jing', '因': 'yin', '斯': 'si', '坦': 'tan', '图': 'tu',
+        '灵': 'ling', '测': 'ce', '试': 'shi', '梅': 'mei', '三': 'san',
+        '一': 'yi', '二': 'er', '四': 'si', '五': 'wu', '六': 'liu',
+        '七': 'qi', '八': 'ba', '九': 'jiu', '十': 'shi', '千': 'qian',
+        '万': 'wan', '百': 'bai', '零': 'ling', '东': 'dong', '南': 'nan',
+        '西': 'xi', '北': 'bei', '中': 'zhong', '上': 'shang', '下': 'xia',
+        '左': 'zuo', '右': 'you', '前': 'qian', '后': 'hou', '天': 'tian',
+        '地': 'di', '日': 'ri', '月': 'yue', '水': 'shui', '火': 'huo',
+        '山': 'shan', '石': 'shi', '风': 'feng', '雨': 'yu', '云': 'yun',
+        '雷': 'lei', '电': 'dian', '光': 'guang', '声': 'sheng', '气': 'qi',
+        '心': 'xin', '情': 'qing', '意': 'yi', '思': 'si', '想': 'xiang',
+        '爱': 'ai', '恨': 'hen', '喜': 'xi', '怒': 'nu', '哀': 'ai',
+        '乐': 'le', '笑': 'xiao', '哭': 'ku', '吃': 'chi', '喝': 'he',
+        '睡': 'shui', '走': 'zou', '跑': 'pao', '跳': 'tiao', '飞': 'fei',
+        '学': 'xue', '习': 'xi', '工': 'gong', '作': 'zuo', '休': 'xiu',
+        '息': 'xi', '生': 'sheng', '活': 'huo', '事': 'shi', '业': 'ye',
+        '家': 'jia', '庭': 'ting', '父': 'fu', '母': 'mu', '儿': 'er',
+        '女': 'nv', '兄': 'xiong', '弟': 'di', '姐': 'jie', '妹': 'mei',
+        '夫': 'fu', '妻': 'qi', '朋': 'peng', '友': 'you', '同': 'tong',
+        '学': 'xue', '老': 'lao', '师': 'shi', '同': 'tong', '事': 'shi',
+        '领': 'ling', '导': 'dao', '客': 'ke', '户': 'hu', '顾': 'gu',
+        '客': 'ke', '商': 'shang', '店': 'dian', '市': 'shi', '场': 'chang',
+        '公': 'gong', '司': 'si', '厂': 'chang', '学': 'xue', '校': 'xiao',
+        '医': 'yi', '院': 'yuan', '饭': 'fan', '店': 'dian', '旅': 'lv',
+        '馆': 'guan', '车': 'che', '站': 'zhan', '飞': 'fei', '机': 'ji',
+        '船': 'chuan', '电': 'dian', '话': 'hua', '电': 'dian', '脑': 'nao',
+        '网': 'wang', '络': 'luo', '信': 'xin', '息': 'xi', '技': 'ji',
+        '术': 'shu', '科': 'ke', '技': 'ji', '产': 'chan', '业': 'ye',
+        '经': 'jing', '济': 'ji', '社': 'she', '会': 'hui', '政': 'zheng',
+        '治': 'zhi', '文': 'wen', '化': 'hua', '艺': 'yi', '术': 'shu',
+        '历': 'li', '史': 'shi', '哲': 'zhe', '学': 'xue', '道': 'dao',
+        '德': 'de', '伦': 'lun', '理': 'li', '美': 'mei', '术': 'shu',
+        '音': 'yin', '乐': 'yue', '体': 'ti', '育': 'yu', '运': 'yun',
+        '动': 'dong', '游': 'you', '戏': 'xi', '娱': 'yu', '乐': 'le',
+        '马': 'ma', '斯': 'si', '克': 'ke', '乔': 'qiao', '布': 'bu',
+        '比': 'bi', '尔': 'er', '盖': 'gai', '茨': 'ci', '恩': 'en',
+        '特': 'te', '福': 'fu', '摩': 'mo', '罗': 'luo', '拉': 'la',
+        '纳': 'na', '德': 'de', '奥': 'ao', '里': 'li', '韦': 'wei',
+        '普': 'pu', '切': 'qie', '尼': 'ni', '曼': 'man', '朗': 'lang',
+        '佩': 'pei', '奇': 'qi', '布林': 'bu', '谢尔': 'xie', '盖': 'gai',
+        '扎': 'zha', '克': 'ke', '贝': 'bei', '佐': 'zuo', '夫': 'fu',
+        '米': 'mi', '哈': 'ha', '伊': 'yi', '龙': 'long', '永': 'yong',
+        '中': 'zhong', '正': 'zheng', '川': 'chuan', '普': 'pu', '特': 'te',
+        '安': 'an', '东': 'dong', '尼': 'ni', '古': 'gu', '尔': 'er',
+        '巴': 'ba', '伦': 'lun', '特': 'te', '舒': 'shu', '默': 'mo',
+        '尔': 'er', '默': 'mo', '克': 'ke', '伯': 'bo', '格': 'ge',
+        '施': 'shi', '密': 'mi', '特': 'te', '蔡': 'cai', '崇': 'chong',
+        '信': 'xin', '福': 'fu', '斯': 'si', '特': 'te', '里': 'li',
+        '森': 'sen', '王': 'wang', '兴': 'xing', '腾': 'teng', '讯': 'xun',
+        '华': 'hua', '为': 'wei', '任': 'ren', '正': 'zheng', '非': 'fei',
+        '雷': 'lei', '军': 'jun', '小': 'xiao', '米': 'mi', '周': 'zhou',
+        '鸿': 'hong', '祎': 'yi', '阿': 'a', '里': 'li', '巴': 'ba',
+        '巴': 'ba', '马': 'ma', '云': 'yun', '黄': 'huang', '峥': 'zheng', '张': 'zhang', '一鸣': 'yi',
+        '字': 'zi', '节': 'jie', '居': 'ju', '夫': 'fu', '顿': 'dun'
+    };
+    return pinyinMap[char] || null;
 }
 
 function idToName(id) {
@@ -888,19 +1058,28 @@ let GLOBAL_API_KEY = DASHSCOPE_API_KEY;
 
 app.post('/api/settings', (req, res) => {
     const { model, apiKey } = req.body;
-    console.log('Settings API called:', { model, apiKey });
+    console.log('Settings API called:', { model, apiKey: apiKey ? '***masked***' : '' });
+    
+    if (!apiKey || !apiKey.trim()) {
+        return res.status(400).json({ error: 'API Key不能为空' });
+    }
     
     if (!model) {
         return res.status(400).json({ error: '模型Code不能为空' });
     }
     
     GLOBAL_MODEL = model;
-    if (apiKey && apiKey.trim()) {
-        GLOBAL_API_KEY = apiKey.trim();
-    }
+    GLOBAL_API_KEY = apiKey.trim();
+    DASHSCOPE_API_KEY = apiKey.trim();
     
-    console.log('Settings updated:', { GLOBAL_MODEL, GLOBAL_API_KEY });
-    res.json({ success: true, message: '设置保存成功' });
+    const saveResult = saveConfig({ dashscopeApiKey: GLOBAL_API_KEY, defaultModel: GLOBAL_MODEL });
+    
+    if (saveResult) {
+        console.log('Settings saved to config.json:', { GLOBAL_MODEL, apiKey: '***masked***' });
+        res.json({ success: true, message: '设置保存成功' });
+    } else {
+        res.status(500).json({ error: '配置文件保存失败' });
+    }
 });
 
 app.get('/api/settings', (req, res) => {
@@ -1717,7 +1896,7 @@ app.post('/api/personas', async (req, res) => {
     try {
         emitProgress(1, `开始蒸馏 "${name}"...`);
 
-        let baseSlug = slugify(name).replace(/-perspective$/, '');
+        let baseSlug = (await slugify(name)).replace(/-perspective$/, '');
         let id = baseSlug + '-perspective';
         let counter = 1;
         while (fs.existsSync(path.join(EXAMPLES_DIR, id, 'SKILL.md'))) {
