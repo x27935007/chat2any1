@@ -1129,18 +1129,316 @@
         /* Hidden */
         .hidden { display: none !important; }
 
-        /* Responsive */
+        /* Mobile menu toggle */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            padding: 10px;
+            color: var(--color-text-secondary);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Responsive - Desktop Large (1200px+) */
+        @media (min-width: 1200px) {
+            .sidebar { width: 320px; }
+            .message-content-wrapper { max-width: 65%; }
+            .modal-box { width: 540px; }
+            .modal-box.wide { width: 720px; }
+        }
+
+        /* Responsive - Tablet (768px - 1199px) */
+        @media (max-width: 1199px) {
+            .sidebar { width: 280px; }
+            .message-content-wrapper { max-width: 70%; }
+            .modal-box { width: 90%; max-width: 520px; }
+            .modal-box.wide { width: 95%; max-width: 680px; }
+        }
+
+        /* Responsive - Mobile (max-width: 768px) */
         @media (max-width: 768px) {
-            .sidebar { width: 240px; }
-            .modal-box { width: 100%; max-width: 400px; }
-            .modal-box.wide { width: 100%; }
-            .persona-grid { grid-template-columns: repeat(2, 1fr); }
+            :root {
+                --spacing-xs: 4px;
+                --spacing-sm: 6px;
+                --spacing-md: 12px;
+                --spacing-lg: 16px;
+                --spacing-xl: 20px;
+                --radius-sm: 6px;
+                --radius-md: 10px;
+                --radius-lg: 14px;
+            }
+            
+            body {
+                font-size: 13px;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            /* Header */
+            header {
+                padding: var(--spacing-sm) var(--spacing-md);
+                position: relative;
+                z-index: 100;
+            }
+            .logo {
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+            }
+            h1 {
+                font-size: 16px;
+            }
+            .subtitle {
+                display: none;
+            }
+            .search-btn {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+            }
+            .user-avatar::after {
+                width: 14px;
+                height: 14px;
+                font-size: 9px;
+            }
+
+            /* Sidebar */
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 280px;
+                z-index: 200;
+                transform: translateX(-100%);
+                transition: transform var(--transition-normal);
+                box-shadow: var(--shadow-lg);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.6);
+                z-index: 150;
+                backdrop-filter: blur(4px);
+            }
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            /* Main Layout */
+            .main-container {
+                flex-direction: column;
+            }
+
+            /* Chat Area */
+            .chat-area {
+                height: calc(100vh - 56px);
+            }
+            .chat-header {
+                padding: 10px 14px;
+            }
+            .chat-header-avatar {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+            .chat-header-name {
+                font-size: 15px;
+            }
+            .chat-header-meta {
+                font-size: 12px;
+            }
+            .header-action-btn {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            /* Messages */
+            .chat-messages {
+                padding: var(--spacing-lg);
+                max-height: calc(100vh - 200px);
+            }
+            .message-content-wrapper {
+                max-width: 85%;
+            }
+            .message-content {
+                padding: var(--spacing-sm) var(--spacing-md);
+                font-size: 14px;
+            }
+            .message-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 11px;
+            }
+            .welcome-icon {
+                font-size: 60px;
+            }
+            .welcome h2 {
+                font-size: 18px;
+            }
+            .welcome p {
+                font-size: 14px;
+            }
+
+            /* Input Area */
+            .input-area {
+                padding: var(--spacing-sm) var(--spacing-md);
+                min-height: 80px;
+            }
+            #messageInput, #dmInput, #groupInput {
+                padding: 11px 14px;
+                font-size: 14px;
+                min-height: 42px;
+            }
+            .send-btn {
+                padding: 11px 22px;
+                font-size: 14px;
+            }
+            .persona-indicator {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .group-controls {
+                gap: var(--spacing-sm);
+            }
+            .mode-select, .rounds-input {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            .rounds-input {
+                width: 55px;
+            }
+            .control-label {
+                font-size: 10px;
+            }
+            .invite-pill-btn, .summary-pill-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            .persona-pill {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            /* Modal */
+            .modal {
+                padding: 12px;
+            }
+            .modal-box {
+                width: 100%;
+                max-width: 400px;
+                padding: 20px;
+            }
+            .modal-box.wide {
+                width: 100%;
+                max-width: 420px;
+            }
+            .modal-title {
+                font-size: 16px;
+            }
+            .form-input {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            .persona-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .persona-check-item {
+                padding: 8px 10px;
+            }
+            .persona-check-name {
+                font-size: 12px;
+            }
+            .btn {
+                padding: 11px;
+                font-size: 13px;
+            }
+
+            /* Tab Bar */
+            .tab {
+                padding: 10px var(--spacing-md);
+                font-size: 13px;
+            }
+
+            /* Cards */
+            .card, .group-card {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+            .card-avatar, .group-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 13px;
+            }
+            .card-name, .group-name {
+                font-size: 13px;
+            }
+            .card-desc, .group-meta {
+                font-size: 11px;
+            }
+            .mini-avatar {
+                width: 18px;
+                height: 18px;
+                font-size: 8px;
+            }
+        }
+
+        /* Responsive - Small Mobile (max-width: 480px) */
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 260px;
+            }
+            .message-content-wrapper {
+                max-width: 90%;
+            }
+            .chat-messages {
+                padding: var(--spacing-md);
+            }
+            .modal-box {
+                max-width: 340px;
+            }
+            .modal-box.wide {
+                max-width: 360px;
+            }
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-action-btn {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* Landscape Mode */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .chat-messages {
+                max-height: calc(100vh - 180px);
+            }
+            .input-area {
+                min-height: 70px;
+            }
         }
     </style>
 </head>
 <body>
 
 <header>
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
     <span class="logo">🧠</span>
     <h1>Nuwa Chat</h1>
     <span class="subtitle">多人格AI思维对话</span>
@@ -1149,6 +1447,9 @@
         <div class="user-avatar" onclick="showSettings()">👤</div>
     </div>
 </header>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
 <div class="main-container">
 
@@ -2221,6 +2522,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeAddModal();
         closeCreateGroupModal();
+        closeSidebar();
     }
 });
 
@@ -2228,6 +2530,64 @@ function showWelcome() {
     document.getElementById('welcome').classList.remove('hidden');
     document.getElementById('dmChat').classList.add('hidden');
     document.getElementById('groupChat').classList.add('hidden');
+}
+
+// ============ Mobile Sidebar ============
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+}
+
+function closeSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+}
+
+// Override selectDM and selectGroup to close sidebar on mobile
+const originalSelectDM = selectDM;
+const originalSelectGroup = selectGroup;
+
+selectDM = function(id) {
+    originalSelectDM(id);
+    closeSidebar();
+};
+
+selectGroup = function(id) {
+    originalSelectGroup(id);
+    closeSidebar();
+};
+
+// Touch gesture support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        const sidebar = document.querySelector('.sidebar');
+        if (diff > 0 && !sidebar.classList.contains('open')) {
+            // Swipe left -> open sidebar
+            toggleSidebar();
+        } else if (diff < 0 && sidebar.classList.contains('open')) {
+            // Swipe right -> close sidebar
+            closeSidebar();
+        }
+    }
 }
 
 // ============ Start ============
