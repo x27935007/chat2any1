@@ -69,6 +69,16 @@ bash deploy.sh
 docker-compose up -d
 ```
 
+### 阿里云部署
+
+详细的阿里云部署指南请查看：[DEPLOY.md](./DEPLOY.md)
+
+快速部署步骤：
+1. 在阿里云 ECS 上安装 Docker 和 Docker Compose
+2. 克隆代码：`git clone https://github.com/x27935007/chat2any1.git`
+3. 配置环境变量：`.env` 文件中填入 API Key
+4. 执行部署：`./deploy.sh`
+
 ## API 接口
 
 ### 获取支持的模型列表
