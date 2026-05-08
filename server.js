@@ -659,13 +659,13 @@ async function slugify(name) {
                 .replace(/[^a-z0-9-]/g, '')
                 .toLowerCase();
         }
-    }
     
     if (!base || base.length < 2) {
         base = 'unnamed';
     }
     
     return base + '-perspective';
+}
 
 function getSimplePinyin(char) {
     const pinyinMap = {
