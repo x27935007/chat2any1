@@ -666,7 +666,6 @@ async function slugify(name) {
     }
     
     return base + '-perspective';
-}
 
 function getSimplePinyin(char) {
     const pinyinMap = {
